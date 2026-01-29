@@ -1,4 +1,4 @@
 # One-line command to push code to GitHub (excludes node_modules via .gitignore)
 # Copy and paste this into PowerShell:
 
-cd "a:\Live Projects\BQV2-Design"; git config --global --add safe.directory 'A:/Live Projects/BQV2-Design' 2>$null; git remote remove origin 2>$null; git remote add origin "https://github.com/BookingQube/BQDesign.git"; git add .; git commit -m "Push BQDesign" 2>$null; git branch -M main 2>$null; git push -u origin main
+cd "a:\Live Projects\BQV2-Design"; git config --global --add safe.directory 'A:/Live Projects/BQV2-Design' 2>$null; git remote remove origin 2>$null; git remote add origin "https://github.com/rpathak0/BQDesign.git"; git add .; git commit -m "Push BQDesign" 2>$null; git branch -M main 2>$null; git push -u origin main

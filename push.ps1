@@ -8,7 +8,7 @@ git config --global --add safe.directory $PWD.Path 2>&1 | Out-Null
 # Remove origin only if it exists (avoid error when no remote yet)
 $remotes = git remote 2>&1 | Out-String
 if ($remotes -match 'origin') { git remote remove origin }
-git remote add origin "https://github.com/BookingQube/BQDesign.git"
+git remote add origin "https://github.com/rpathak0/BQDesign.git"
 
 git add .
 # Commit only if there are changes (suppress "nothing to commit" message)
