@@ -1,34 +1,32 @@
-import "../globals.css";
 import { Providers } from "@/components/providers";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { WhatsAppButton } from "@/components/whatsapp-button";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
 
+/**
+ * Locale layout: wraps with next-intl and Providers only.
+ * Root layout (app/layout.tsx) provides html, body, and globals.css so 404 always has styles.
+ */
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  
-  if (!['en', 'ar'].includes(locale)) {
+
+  if (!["en", "ar"].includes(locale)) {
     notFound();
   }
- 
+
   const messages = await getMessages();
- 
+
   return (
-    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <Providers>
-            {children}
-          </Providers>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <Providers>
+        {children}
+      </Providers>
+    </NextIntlClientProvider>
   );
 }
