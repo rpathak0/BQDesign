@@ -188,10 +188,15 @@ export function FloatingControls({
   const handleClearTrainingDump = () => {
     if (typeof window !== "undefined" && window.confirm("Clear all logged prompts? This cannot be undone.")) {
       clearDump();
+      setDumpCount(0);
     }
   };
 
-  const dumpCount = typeof window !== "undefined" ? getDump().length : 0;
+  // Avoid hydration mismatch: server has no localStorage, so render 0 until mounted
+  const [dumpCount, setDumpCount] = useState(0);
+  useEffect(() => {
+    setDumpCount(getDump().length);
+  }, [messages]);
 
   return (
     <div className={cn("fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end pointer-events-none", language === "ar" ? "left-6 right-auto items-start" : "")}>
