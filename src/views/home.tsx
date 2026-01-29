@@ -344,7 +344,7 @@ export default function Home() {
             
             <Button 
                 variant="outline" 
-                className="relative z-10 rounded-full px-10 py-7 border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 transition-all duration-300 group"
+                className="relative z-10 rounded-full px-10 py-7 border-gray-300 bg-white dark:border-white/20 dark:bg-black/40 backdrop-blur-md text-black hover:text-gray-600 hover:bg-gray-100 dark:text-white dark:hover:bg-white/10 dark:hover:border-white/40 transition-all duration-300 group"
                 onClick={() => setShowExplore(!showExplore)}
             >
                 <span className="text-lg font-display">{t('exploreMore')}</span>
@@ -430,11 +430,11 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Explore more within now showing */}
+            {/* Explore more within now showing - black default, gray hover in light mode */}
             <div className="flex justify-center pt-4 md:pt-8">
               <Button
                 variant="outline"
-                className="relative z-10 rounded-full px-8 py-6 border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/40 transition-all duration-300 group text-sm md:text-base"
+                className="relative z-10 rounded-full px-8 py-6 border-gray-300 bg-white dark:border-white/20 dark:bg-black/40 backdrop-blur-md text-black hover:text-gray-600 hover:bg-gray-100 dark:text-white dark:hover:bg-white/10 dark:hover:border-white/40 transition-all duration-300 group text-sm md:text-base"
                 data-testid="button-now-explore-more"
               >
                 <span className="font-display">{t('exploreMore')}</span>

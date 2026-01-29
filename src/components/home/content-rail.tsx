@@ -54,10 +54,10 @@ export function ContentRail({ title, children, action, rows = 1 }: ContentRailPr
             </Button>
           </div>
 
-          {/* Discover More CTA - desktop only */}
+          {/* Discover More CTA - desktop only; black in light mode, yellow in dark */}
           <Button
             variant="link"
-            className="hidden md:inline-flex text-[#ffdd00] text-sm font-semibold items-center gap-1 whitespace-nowrap px-0"
+            className="hidden md:inline-flex text-black dark:text-[#ffdd00] text-sm font-semibold items-center gap-1 whitespace-nowrap px-0"
             data-testid={`button-rail-discover-${title.toLowerCase().replace(/\s+/g, "-")}`}
           >
             Discover More

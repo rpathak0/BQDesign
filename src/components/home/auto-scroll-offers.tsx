@@ -64,12 +64,12 @@ export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
 
   return (
     <section 
-        className="container mx-auto px-4 mb-16"
+        className="container mx-auto px-4 pt-10 md:pt-12 mb-16"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
     >
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-display font-bold text-white">Offers & Promotions</h2>
+        <h2 className="text-3xl font-display font-bold text-black dark:text-white">Offers & Promotions</h2>
         
         <div className="flex items-center gap-4">
              {/* Navigation Buttons */}
@@ -94,7 +94,7 @@ export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
 
             <Button
               variant="link"
-              className="text-[#ffdd00] font-semibold group hidden md:flex items-center gap-1"
+              className="text-black dark:text-[#ffdd00] font-semibold group hidden md:flex items-center gap-1"
             >
               Discover More
               <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />

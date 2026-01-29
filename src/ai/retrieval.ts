@@ -106,3 +106,26 @@ export async function searchAssistant(query: string, filters?: SearchFilters): P
 
   return results.slice(0, 5); // Return top 5
 }
+
+/** Curated mix of events, movies, and offers for when search has no results or user asks for suggestions */
+export async function getCuratedSuggestions(limit = 5): Promise<SearchResult[]> {
+  const [events, movies, offers] = await Promise.all([
+    getEvents(),
+    getMovies(),
+    getOffers()
+  ]);
+
+  const withScore = (item: AssistantItem, reason: string): SearchResult => ({
+    item,
+    score: 1,
+    whyMatched: [reason]
+  });
+
+  const mixed: SearchResult[] = [
+    ...events.slice(0, 2).map(e => withScore(e, "Popular event")),
+    ...movies.slice(0, 2).map(m => withScore(m, "Recommended for you")),
+    ...offers.slice(0, 1).map(o => withScore(o, "Great offer"))
+  ];
+
+  return mixed.slice(0, limit);
+}

@@ -66,7 +66,7 @@ export function BlogsSection() {
           </div>
           <Button
             variant="link"
-            className="text-[#ffdd00] text-xs md:text-sm font-semibold flex items-center gap-1 whitespace-nowrap"
+            className="text-black dark:text-[#ffdd00] text-xs md:text-sm font-semibold flex items-center gap-1 whitespace-nowrap"
             data-testid="button-discover-blogs"
           >
             Discover More

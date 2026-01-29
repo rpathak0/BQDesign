@@ -61,17 +61,17 @@ export function Navbar({ onAiClick }: { onAiClick?: () => void }) {
           {/* Right Actions */}
           <div className="flex items-center gap-2 sm:gap-4">
             
-            {/* Search Trigger */}
+            {/* Search Trigger - white in light mode for visibility on dark header */}
             <Button 
                 variant="ghost" 
                 size="icon" 
-                className="hidden md:flex rounded-full w-10 h-10 hover:bg-black/5 dark:hover:bg-white/10"
+                className="hidden md:flex rounded-full w-10 h-10 text-white hover:text-white/90 hover:bg-white/10 dark:text-foreground dark:hover:bg-white/10 dark:hover:text-foreground"
                 onClick={() => setSearchOpen(true)}
             >
                 <Search className="w-5 h-5" />
             </Button>
 
-            <Button variant="ghost" size="sm" className="hidden lg:flex gap-2 text-foreground/80 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/10 rounded-full">
+            <Button variant="ghost" size="sm" className="hidden lg:flex gap-2 text-white hover:text-white/90 hover:bg-white/10 dark:text-foreground/80 dark:hover:text-foreground dark:hover:bg-white/10 rounded-full">
               <MapPin className="w-4 h-4" />
               <span>{t('dubai')}</span>
             </Button>
