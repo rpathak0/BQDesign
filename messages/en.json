@@ -1,0 +1,35 @@
+{
+  "Navbar": {
+    "searchPlaceholder": "Search for events...",
+    "login": "Login",
+    "dubai": "Dubai"
+  },
+  "Home": {
+    "thingsToDo": "Things to do in",
+    "curated": "Curated experiences just for you",
+    "movies": "Movies",
+    "viewAll": "View all",
+    "exploreMore": "Explore More",
+    "popularArtists": "Popular Artists",
+    "topEvents": "Top events",
+    "topAttractions": "Top attractions and experiences",
+    "venues": "Venues",
+    "eventsToday": "Events today",
+    "festivals": "Festivals",
+    "nightlife": "Nightlife",
+    "comedy": "Comedy Events",
+    "arabic": "Arabic Events",
+    "nowShowing": "Now Showing",
+    "comingSoon": "Coming Soon",
+    "advanceBooking": "Advance Booking"
+  },
+  "Footer": {
+    "subscribe": "Subscribe to our newsletter",
+    "emailOrPhone": "Email address or Phone number",
+    "join": "Join",
+    "about": "About Us",
+    "contact": "Contact",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  }
+}

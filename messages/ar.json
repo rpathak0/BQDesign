@@ -1,0 +1,35 @@
+{
+  "Navbar": {
+    "searchPlaceholder": "البحث عن الفعاليات...",
+    "login": "تسجيل الدخول",
+    "dubai": "دبي"
+  },
+  "Home": {
+    "thingsToDo": "أشياء للقيام بها في",
+    "curated": "تجارب مختارة خصيصاً لك",
+    "movies": "الأفلام",
+    "viewAll": "عرض الكل",
+    "exploreMore": "اكتشف المزيد",
+    "popularArtists": "فنانون مشهورون",
+    "topEvents": "أهم الفعاليات",
+    "topAttractions": "أهم المعالم والتجارب",
+    "venues": "الأماكن",
+    "eventsToday": "فعاليات اليوم",
+    "festivals": "المهرجانات",
+    "nightlife": "الحياة الليلية",
+    "comedy": "فعاليات كوميدية",
+    "arabic": "فعاليات عربية",
+    "nowShowing": "يعرض الآن",
+    "comingSoon": "قريباً",
+    "advanceBooking": "حجز مسبق"
+  },
+  "Footer": {
+    "subscribe": "اشترك في نشرتنا الإخبارية",
+    "emailOrPhone": "البريد الإلكتروني أو رقم الهاتف",
+    "join": "اشترك",
+    "about": "معلومات عنا",
+    "contact": "اتصل بنا",
+    "terms": "الشروط والأحكام",
+    "privacy": "سياسة الخصوصية"
+  }
+}
