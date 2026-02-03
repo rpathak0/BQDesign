@@ -19,6 +19,7 @@ import { AISearchStub } from "@/components/home/ai-search-stub";
 import { MOVIES, OFFERS } from "@/data/mockContent";
 import { EVENTS, CATEGORIES, ARTISTS, VENUES } from "@/data/bqData";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { ChevronRight, ChevronDown, MapPin } from "lucide-react";
 import {
   DropdownMenu,
@@ -27,6 +28,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ListingCard } from "@/components/cards/listing-card";
 import { FloatingControls } from "@/components/layout/floating-controls";
@@ -34,10 +36,56 @@ import { MobileTabbar } from "@/components/layout/mobile-tabbar";
 import { PosterCard } from "@/components/cards/poster-card";
 import { useTranslations } from "next-intl";
 import { LoyaltyBanner } from "@/components/home/loyalty-banner";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { staggerContainer, staggerChild } from "@/lib/motion-variants";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+
+function CategoriesStagger({ categories, reduced, base }: { categories: typeof CATEGORIES; reduced: boolean; base: string }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const containerVariants = reduced ? {} : staggerContainer;
+  const childVariants = reduced ? {} : staggerChild;
+  return (
+    <>
+      <div className="md:hidden -mx-4 px-4 overflow-x-auto no-scrollbar">
+        <div className="flex gap-6">
+          {categories.map((category) => (
+            <Link key={category.id} href={`${base}/categories${category.name ? `?category=${encodeURIComponent(category.name)}` : ""}`} className="shrink-0 w-[120px] flex justify-center" data-testid={`card-category-${category.id}`}>
+              <CategoryCircle category={category} />
+            </Link>
+          ))}
+        </div>
+      </div>
+      <motion.div
+        ref={ref}
+        className="hidden md:grid grid-cols-4 lg:grid-cols-7 gap-8 md:gap-10 place-items-center"
+        variants={containerVariants}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+      >
+        {categories.map((category) => (
+          <Link key={category.id} href={`${base}/categories${category.name ? `?category=${encodeURIComponent(category.name)}` : ""}`} className="w-full flex justify-center">
+            <motion.div
+              variants={childVariants}
+              className="w-full flex justify-center transform hover:-translate-y-2 transition-transform duration-300"
+              data-testid={`card-category-${category.id}`}
+            >
+              <CategoryCircle category={category} />
+            </motion.div>
+          </Link>
+        ))}
+      </motion.div>
+    </>
+  );
+}
 
 export default function Home() {
-
   const t = useTranslations('Home');
+  const reduced = usePrefersReducedMotion();
+  const params = useParams();
+  const locale = (params?.locale as string) ?? "en";
+  const base = `/${locale}`;
   const showLoyalty = process.env.NEXT_PUBLIC_FEATURE_LOYALTY === 'true' || true; // Force true for demo
 
   const nowShowing = MOVIES.filter((m) => m.status === "now_showing");
@@ -97,7 +145,7 @@ export default function Home() {
         <FloatingControls isOpen={isAiOpen} onClose={() => setIsAiOpen(false)} onOpen={() => setIsAiOpen(true)} />
         
         {/* Things to do header + Filters */}
-        <div className="container mx-auto px-4 mt-12 md:mt-16 mb-8">
+        <div className="container mx-auto mt-12 md:mt-16 mb-8">
 
             <div className="flex flex-col gap-3 border-b border-border/20 pb-4">
               <div className="flex items-end justify-between gap-4">
@@ -138,34 +186,9 @@ export default function Home() {
             </div>
         </div>
 
-        {/* Categories */}
-        <section className="container mx-auto px-4 mb-16 md:mb-20">
-          <div className="md:hidden -mx-4 px-4 overflow-x-auto no-scrollbar">
-            <div className="flex gap-6">
-
-              {CATEGORIES.map((category) => (
-                <div
-                  key={category.id}
-                  className="shrink-0 w-[120px] flex justify-center transform hover:-translate-y-2 transition-transform duration-300"
-                  data-testid={`card-category-${category.id}`}
-                >
-                  <CategoryCircle category={category} />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="hidden md:grid grid-cols-4 lg:grid-cols-7 gap-8 md:gap-10 place-items-center">
-            {CATEGORIES.map((category) => (
-              <div
-                key={category.id}
-                className="w-full flex justify-center transform hover:-translate-y-2 transition-transform duration-300"
-                data-testid={`card-category-${category.id}`}
-              >
-                <CategoryCircle category={category} />
-              </div>
-            ))}
-          </div>
+        {/* Categories - stagger on scroll */}
+        <section className="container mx-auto mb-16 md:mb-20">
+          <CategoriesStagger categories={CATEGORIES} reduced={reduced} base={base} />
         </section>
 
         {/* Gradient Container 1: Top Events & Attractions */}
@@ -200,18 +223,20 @@ export default function Home() {
         </div>
 
         {/* Popular Artists */}
-        <section className="container mx-auto px-4 py-8 bg-secondary/10 rounded-3xl mb-8">
+        <section className="container mx-auto py-8 bg-secondary/10 rounded-3xl mb-8">
           <div className="flex items-center justify-between gap-3 mb-6">
              <h2 className="text-2xl md:text-3xl font-display font-bold whitespace-nowrap">
                {t('popularArtists')}
              </h2>
-             <Button
-               variant="link"
-               className="text-primary text-xs md:text-sm px-0"
-               data-testid="button-view-all-artists"
-             >
-               {t('viewAll')}
-             </Button>
+             <Link href={`${base}/artists`}>
+               <Button
+                 variant="link"
+                 className="text-primary text-xs md:text-sm px-0"
+                 data-testid="button-view-all-artists"
+               >
+                 {t('viewAll')}
+               </Button>
+             </Link>
           </div>
           <div className="md:hidden -mx-4 px-4 overflow-x-auto no-scrollbar">
             <div className="flex gap-6">
@@ -240,12 +265,14 @@ export default function Home() {
           <ContentRail
             title={t('venues')}
             action={
-              <Button
-                variant="link"
-                className="text-primary text-xs md:text-sm"
-              >
-                {t('viewAll')} <ChevronRight className="w-3 h-3 ml-1" />
-              </Button>
+              <Link href={`${base}/venues`}>
+                <Button
+                  variant="link"
+                  className="text-primary text-xs md:text-sm"
+                >
+                  {t('viewAll')} <ChevronRight className="w-3 h-3 ml-1" />
+                </Button>
+              </Link>
             }
           >
             {VENUES.map((venue) => (
@@ -356,7 +383,7 @@ export default function Home() {
         <section className="relative py-12 md:py-16">
 
           <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#020617] to-[#020617]" />
-          <div className="relative container mx-auto px-4 space-y-8">
+          <div className="relative container mx-auto space-y-8">
             {/* Movies heading */}
             <div className="flex items-baseline justify-between gap-3">
               <div className="min-w-0">

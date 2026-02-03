@@ -365,7 +365,7 @@ export function FloatingControls({
                     type="submit"
                     size="icon"
                     className={cn(
-                        "absolute top-1/2 -translate-y-1/2 h-9 w-9 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-primary/30 transition-all disabled:opacity-50",
+                        "absolute top-1/2 -translate-y-1/2 h-9 w-9 rounded-lg bg-white dark:bg-card text-primary border-2 border-primary hover:bg-primary/5 shadow-md transition-all disabled:opacity-50",
                         language === "ar" ? "left-1" : "right-1"
                     )}
                     disabled={isLoading || !inputValue.trim()}

@@ -33,24 +33,32 @@ export function Navbar({ onAiClick }: { onAiClick?: () => void }) {
       <nav
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 hidden md:block",
-          scrolled 
-            ? "bg-black/80 backdrop-blur-xl border-b border-white/10 py-2" 
-            : "bg-transparent border-transparent py-4"
+          scrolled
+            ? "bg-black/80 backdrop-blur-xl border-b border-white/10 py-2"
+            : "bg-transparent dark:bg-transparent backdrop-blur-sm py-4 border-b border-white/10 dark:border-transparent"
         )}
       >
-        <div className="px-6 flex items-center justify-between gap-4">
+        <div
+          className={cn(
+            "container mx-auto flex items-center justify-between gap-4",
+            scrolled ? "text-white" : "text-white"
+          )}
+        >
           {/* Logo */}
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
                 <SafeImage 
                   src="/assets/hero-bg.png" 
                   alt="BookingQube" 
-                  className="h-10 w-auto object-contain brightness-0 invert dark:brightness-100 dark:invert-0 transition-all"
+                  className={cn(
+                    "h-10 w-auto object-contain transition-all",
+                    "brightness-0 invert"
+                  )}
                 />
             </Link>
 
             {showLoyalty && (
-               <Link href="/loyalty" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+               <Link href="/loyalty" className="text-sm font-medium opacity-80 hover:opacity-100 hover:text-primary transition-colors">
                   Loyalty Program
                </Link>
             )}
@@ -60,32 +68,30 @@ export function Navbar({ onAiClick }: { onAiClick?: () => void }) {
 
           {/* Right Actions */}
           <div className="flex items-center gap-2 sm:gap-4">
-            
-            {/* Search Trigger - white in light mode for visibility on dark header */}
             <Button 
                 variant="ghost" 
                 size="icon" 
-                className="hidden md:flex rounded-full w-10 h-10 text-white hover:text-white/90 hover:bg-white/10 dark:text-foreground dark:hover:bg-white/10 dark:hover:text-foreground"
+                className="hidden md:flex rounded-full w-10 h-10 opacity-90 hover:opacity-100 hover:bg-black/10 dark:hover:bg-white/10"
                 onClick={() => setSearchOpen(true)}
             >
                 <Search className="w-5 h-5" />
             </Button>
 
-            <Button variant="ghost" size="sm" className="hidden lg:flex gap-2 text-white hover:text-white/90 hover:bg-white/10 dark:text-foreground/80 dark:hover:text-foreground dark:hover:bg-white/10 rounded-full">
+            <Button variant="ghost" size="sm" className="hidden lg:flex gap-2 opacity-90 hover:opacity-100 hover:bg-black/10 dark:hover:bg-white/10 rounded-full">
               <MapPin className="w-4 h-4" />
               <span>{t('dubai')}</span>
             </Button>
             
-            <div className="h-6 w-px bg-border/50 hidden lg:block" />
+            <div className="h-6 w-px bg-current opacity-30 hidden lg:block" />
             
             <ThemeToggle />
             <LanguageSwitcher />
             
-            <Button className="rounded-full px-6 hidden sm:flex bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25">
+            <Button className="rounded-full px-6 hidden sm:flex bg-white dark:bg-white text-black dark:text-black border-2 border-white dark:border-white hover:bg-gray-100 dark:hover:bg-gray-100 shadow-lg">
               {t('login')}
             </Button>
             
-            <Button variant="ghost" size="icon" className="sm:hidden">
+            <Button variant="ghost" size="icon" className="sm:hidden opacity-90 hover:opacity-100">
               <Menu className="w-5 h-5" />
             </Button>
           </div>

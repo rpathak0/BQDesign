@@ -3,7 +3,7 @@ import { ShieldCheck, BadgeCheck, Headphones, CreditCard, PhoneCall } from "luci
 export function TrustStrip() {
   return (
     <section className="border-t border-gray-200 dark:border-white/5 bg-white dark:bg-black/40">
-      <div className="container mx-auto px-4 py-8 md:py-10 space-y-8">
+      <div className="container mx-auto py-8 md:py-10 space-y-8">
         {/* Why book with BookingQube */}
         <div className="space-y-6">
           <h2 className="text-lg md:text-xl font-display font-semibold text-gray-900 dark:text-foreground">

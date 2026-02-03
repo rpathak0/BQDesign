@@ -37,7 +37,7 @@ export function BlogsSection() {
   };
 
   return (
-    <section className="container mx-auto px-4 py-10 md:py-14">
+    <section className="container mx-auto py-10 md:py-14">
       <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
         <div>
           <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight whitespace-nowrap">

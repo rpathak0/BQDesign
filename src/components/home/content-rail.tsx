@@ -23,7 +23,7 @@ export function ContentRail({ title, children, action, rows = 1 }: ContentRailPr
 
   return (
     <div className="py-6 md:py-8 space-y-6">
-      <div className="container mx-auto px-4 flex items-center justify-between gap-3">
+      <div className="container mx-auto flex items-center justify-between gap-3">
         <div className="min-w-0">
           <h2 className="text-xl md:text-3xl font-display font-bold tracking-tight md:whitespace-nowrap">
             {title}
@@ -69,7 +69,7 @@ export function ContentRail({ title, children, action, rows = 1 }: ContentRailPr
       <div 
         ref={scrollRef}
         className={cn(
-          "px-4 pb-6 md:pb-8 container mx-auto no-scrollbar snap-x overflow-x-auto",
+          "pb-6 md:pb-8 container mx-auto no-scrollbar snap-x overflow-x-auto",
           rows === 1 
             ? "flex gap-4 md:gap-6" 
             : "grid grid-rows-2 grid-flow-col gap-4 auto-cols-max"

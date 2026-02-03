@@ -2,6 +2,7 @@ import { Movie } from "./mockContent";
 
 export interface Event {
   id: string;
+  slug?: string;
   title: string;
   date: string;
   location: string;
@@ -22,6 +23,7 @@ export interface Artist {
   id: string;
   name: string;
   image: string;
+  genre?: string;
 }
 
 export interface Venue {
@@ -29,6 +31,8 @@ export interface Venue {
   name: string;
   location: string;
   image: string;
+  type?: "arena" | "hotel" | "club" | "lounge" | "beach" | "park" | "restaurant";
+  upcomingEvents?: number;
 }
 
 // Re-export existing Movie interface and data
@@ -37,6 +41,7 @@ export * from "./mockContent";
 export const EVENTS: Event[] = [
   {
     id: "e1",
+    slug: "lusail-winter-wonderland",
     title: "Lusail Winter Wonderland",
     date: "Open Daily",
     location: "Al Maha Island",
@@ -48,6 +53,7 @@ export const EVENTS: Event[] = [
   },
   {
     id: "e2",
+    slug: "disney-on-ice",
     title: "Disney on Ice",
     date: "Jan 25 - Feb 5",
     location: "Etihad Arena",
@@ -59,6 +65,7 @@ export const EVENTS: Event[] = [
   },
   {
     id: "e3",
+    slug: "formula-1-grand-prix",
     title: "Formula 1 Grand Prix",
     date: "Nov 24-26",
     location: "Yas Marina Circuit",
@@ -70,6 +77,7 @@ export const EVENTS: Event[] = [
   },
   {
     id: "e4",
+    slug: "desert-safari-adventure",
     title: "Desert Safari Adventure",
     date: "Daily",
     location: "Red Dunes",
@@ -81,6 +89,7 @@ export const EVENTS: Event[] = [
   },
   {
     id: "e5",
+    slug: "museum-of-the-future",
     title: "Museum of the Future",
     date: "Daily Slots",
     location: "Sheikh Zayed Road",
@@ -102,17 +111,24 @@ export const CATEGORIES: Category[] = [
   { id: "c7", name: "Desert", image: "/assets/hero-bg.png" },
 ];
 
+export const ARTIST_GENRES = ["EDM", "House", "Pop", "Comedy", "Arabic", "All"] as const;
+
 export const ARTISTS: Artist[] = [
-  { id: "a1", name: "Calvin Harris", image: "/assets/hero-bg.png" },
-  { id: "a2", name: "Ben Böhmer", image: "/assets/hero-bg.png" },
-  { id: "a3", name: "Alesso", image: "/assets/hero-bg.png" },
-  { id: "a4", name: "Afrojack", image: "/assets/hero-bg.png" },
-  { id: "a5", name: "KYGO", image: "/assets/hero-bg.png" },
-  { id: "a6", name: "Solomun", image: "/assets/hero-bg.png" },
+  { id: "a1", name: "Calvin Harris", image: "/assets/hero-bg.png", genre: "EDM" },
+  { id: "a2", name: "Ben Böhmer", image: "/assets/hero-bg.png", genre: "House" },
+  { id: "a3", name: "Alesso", image: "/assets/hero-bg.png", genre: "EDM" },
+  { id: "a4", name: "Afrojack", image: "/assets/hero-bg.png", genre: "EDM" },
+  { id: "a5", name: "KYGO", image: "/assets/hero-bg.png", genre: "EDM" },
+  { id: "a6", name: "Solomun", image: "/assets/hero-bg.png", genre: "House" },
 ];
 
+export const VENUE_TYPES = ["arena", "hotel", "club", "lounge", "beach", "park", "restaurant"] as const;
+
 export const VENUES: Venue[] = [
-  { id: "v1", name: "Etihad Arena", location: "Yas Island", image: "/assets/hero-bg.png" },
-  { id: "v2", name: "Coca-Cola Arena", location: "City Walk", image: "/assets/hero-bg.png" },
-  { id: "v3", name: "Dubai Opera", location: "Downtown Dubai", image: "/assets/hero-bg.png" },
+  { id: "v1", name: "Etihad Arena", location: "Yas Island", image: "/assets/hero-bg.png", type: "arena", upcomingEvents: 12 },
+  { id: "v2", name: "Coca-Cola Arena", location: "City Walk", image: "/assets/hero-bg.png", type: "arena", upcomingEvents: 8 },
+  { id: "v3", name: "Dubai Opera", location: "Downtown Dubai", image: "/assets/hero-bg.png", type: "arena", upcomingEvents: 5 },
+  { id: "v4", name: "White Dubai", location: "Meydan", image: "/assets/hero-bg.png", type: "club", upcomingEvents: 3 },
+  { id: "v5", name: "Atlantis The Palm", location: "Palm Jumeirah", image: "/assets/hero-bg.png", type: "hotel", upcomingEvents: 2 },
+  { id: "v6", name: "Zero Gravity", location: "Dubai Marina", image: "/assets/hero-bg.png", type: "beach", upcomingEvents: 4 },
 ];

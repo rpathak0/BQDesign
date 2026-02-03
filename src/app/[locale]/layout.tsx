@@ -2,9 +2,10 @@ import { Providers } from "@/components/providers";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { PageTransition } from "@/components/layout/page-transition";
 
 /**
- * Locale layout: wraps with next-intl and Providers only.
+ * Locale layout: wraps with next-intl, Providers, and page transition.
  * Root layout (app/layout.tsx) provides html, body, and globals.css so 404 always has styles.
  */
 export default async function LocaleLayout({
@@ -25,7 +26,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <Providers>
-        {children}
+        <PageTransition>{children}</PageTransition>
       </Providers>
     </NextIntlClientProvider>
   );

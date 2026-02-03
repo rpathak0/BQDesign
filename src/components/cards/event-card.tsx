@@ -1,19 +1,28 @@
 "use client";
 
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { Event } from "@/data/bqData";
 import { BadgePill } from "@/components/ui/badge-pill";
 import { Calendar, MapPin, Flame, Hourglass, Trophy, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SafeImage } from "@/components/shared/safe-image";
 import { HoverVideoPreview } from "@/components/ui/hover-video-preview";
+import { motion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 interface EventCardProps {
-  event: Event & { statusTag?: string; videoUrl?: string };
+  event: Event & { statusTag?: string; videoUrl?: string; slug?: string };
   variant?: "portrait" | "landscape";
+  href?: string | null;
 }
 
-export function EventCard({ event, variant = "landscape" }: EventCardProps) {
+export function EventCard({ event, variant = "landscape", href = null }: EventCardProps) {
   const isLandscape = variant === "landscape";
+  const reduced = usePrefersReducedMotion();
+  const params = useParams();
+  const locale = (params?.locale as string) ?? "en";
+  const linkHref = href ?? (event.slug ? `/${locale}/events/${event.slug}` : undefined);
 
   const getStatusConfig = (status?: string) => {
     switch (status) {
@@ -32,11 +41,8 @@ export function EventCard({ event, variant = "landscape" }: EventCardProps) {
 
   const statusConfig = getStatusConfig(event.status);
 
-  return (
-    <div className={cn(
-      "group relative overflow-hidden rounded-xl border border-border/50 bg-card hover:border-primary/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-lg",
-      isLandscape ? "w-[280px] md:w-[320px]" : "w-[200px]"
-    )}>
+  const cardContent = (
+    <>
       {/* Image Section */}
       <HoverVideoPreview 
         videoUrl={event.videoUrl} 
@@ -95,6 +101,35 @@ export function EventCard({ event, variant = "landscape" }: EventCardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </>
+  );
+
+  const className = cn(
+    "group relative overflow-hidden rounded-xl border border-border/50 bg-card hover:border-primary/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-lg max-w-full",
+    isLandscape ? "w-[280px] md:w-[320px]" : "w-[200px]"
+  );
+
+  if (linkHref) {
+    return (
+      <motion.div
+        whileHover={reduced ? undefined : { y: -4 }}
+        transition={{ duration: 0.2 }}
+        className="shrink-0"
+      >
+        <Link href={linkHref} className="block">
+          <div className={className}>{cardContent}</div>
+        </Link>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      whileHover={reduced ? undefined : { y: -4 }}
+      transition={{ duration: 0.2 }}
+      className={cn("shrink-0", className)}
+    >
+      {cardContent}
+    </motion.div>
   );
 }

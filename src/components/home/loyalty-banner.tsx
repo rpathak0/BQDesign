@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 export function LoyaltyBanner() {
   return (
-    <div className="container mx-auto px-4 my-12">
+    <div className="container mx-auto my-12">
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-900/80 to-indigo-900/80 border border-white/10 p-8 md:p-12">
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div className="space-y-4 max-w-2xl">

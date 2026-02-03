@@ -1,6 +1,8 @@
 "use client";
 
-import { Facebook, Twitter, Instagram, Youtube, Mail, Phone } from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { Facebook, Twitter, Instagram, Youtube, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTranslations } from "next-intl";
@@ -8,10 +10,13 @@ import { SafeImage } from "@/components/shared/safe-image";
 
 export function Footer() {
   const t = useTranslations('Footer');
+  const params = useParams();
+  const locale = (params?.locale as string) ?? "en";
+  const base = `/${locale}`;
 
   return (
     <footer className="hidden md:block bg-white dark:bg-card border-t border-gray-200 dark:border-border/50 pt-16 pb-8 mt-20 text-gray-900 dark:text-foreground">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="space-y-4">
@@ -56,10 +61,10 @@ export function Footer() {
           <div>
             <h3 className="font-display font-semibold mb-6 text-gray-900 dark:text-foreground">Support</h3>
             <ul className="space-y-3 text-sm text-gray-600 dark:text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">{t('about')}</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">{t('privacy')}</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">{t('terms')}</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">{t('contact')}</a></li>
+              <li><Link href={`${base}/about`} className="hover:text-primary transition-colors">{t('about')}</Link></li>
+              <li><Link href={`${base}/privacy`} className="hover:text-primary transition-colors">{t('privacy')}</Link></li>
+              <li><Link href={`${base}/terms`} className="hover:text-primary transition-colors">{t('terms')}</Link></li>
+              <li><Link href={`${base}/contact`} className="hover:text-primary transition-colors">{t('contact')}</Link></li>
             </ul>
           </div>
 
@@ -81,9 +86,9 @@ export function Footer() {
         <div className="border-t border-gray-200 dark:border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600 dark:text-muted-foreground">
           <p>&copy; 2026 BookingQube. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-gray-900 dark:hover:text-foreground">{t('privacy')}</a>
-            <a href="#" className="hover:text-gray-900 dark:hover:text-foreground">{t('terms')}</a>
-            <a href="#" className="hover:text-gray-900 dark:hover:text-foreground">Sitemap</a>
+            <Link href={`${base}/privacy`} className="hover:text-gray-900 dark:hover:text-foreground">{t('privacy')}</Link>
+            <Link href={`${base}/terms`} className="hover:text-gray-900 dark:hover:text-foreground">{t('terms')}</Link>
+            <Link href={`${base}/events`} className="hover:text-gray-900 dark:hover:text-foreground">Events</Link>
           </div>
         </div>
       </div>

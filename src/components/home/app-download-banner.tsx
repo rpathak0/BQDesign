@@ -4,7 +4,7 @@ import { SafeImage } from "@/components/shared/safe-image";
 
 export function AppDownloadBanner() {
   return (
-    <section className="container mx-auto px-4 py-10 md:py-16">
+    <section className="container mx-auto py-10 md:py-16">
       <div className="relative rounded-[2.5rem] overflow-hidden bg-black border border-white/10 shadow-2xl">
         <div className="grid lg:grid-cols-2 gap-0 items-center">
           

@@ -76,7 +76,7 @@ export function QuickFilters() {
                       className={cn(
                         "px-4 py-2 rounded-full text-xs font-semibold transition-all whitespace-nowrap border flex items-center gap-2",
                         activeDate === filter
-                          ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/25"
+                          ? "bg-white dark:bg-card text-primary border-2 border-primary shadow-lg"
                           : "bg-secondary/40 text-secondary-foreground border-transparent hover:bg-secondary hover:border-border"
                       )}
                       onClick={() => setActiveDate(filter)}

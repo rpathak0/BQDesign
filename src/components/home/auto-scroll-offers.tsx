@@ -64,7 +64,7 @@ export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
 
   return (
     <section 
-        className="container mx-auto px-4 pt-10 md:pt-12 mb-16"
+        className="container mx-auto pt-10 md:pt-12 mb-16"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
     >

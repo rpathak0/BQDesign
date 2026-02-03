@@ -30,7 +30,7 @@ export function SearchOverlay({ open, onOpenChange }: SearchOverlayProps) {
         </VisuallyHidden.Root>
         
         {/* Header */}
-        <div className="container mx-auto px-4 py-4 flex items-center gap-4 border-b border-border/20">
+        <div className="container mx-auto py-4 flex items-center gap-4 border-b border-border/20">
           <Search className="w-5 h-5 text-primary" />
           <Input 
             autoFocus
@@ -53,7 +53,7 @@ export function SearchOverlay({ open, onOpenChange }: SearchOverlayProps) {
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto py-8">
-          <div className="container mx-auto px-4 space-y-8">
+          <div className="container mx-auto space-y-8">
             
             {/* Suggestion Chips */}
             <div className="flex flex-wrap gap-3">

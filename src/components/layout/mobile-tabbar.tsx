@@ -38,7 +38,7 @@ export function MobileTabbar() {
 
   const mainTabs = [
     { id: "home", icon: Home, label: "Home", href: base },
-    { id: "explore", icon: Compass, label: "Explore", href: `${base}/explore` },
+    { id: "explore", icon: Compass, label: "Events", href: `${base}/events` },
     { id: "bookings", icon: Ticket, label: "Bookings", href: `${base}/bookings` },
   ];
 
@@ -62,11 +62,15 @@ export function MobileTabbar() {
     {
       title: "Support",
       items: [
-        { icon: HelpCircle, label: t("about"), href: "#" },
-        { icon: HelpCircle, label: t("privacy"), href: "#" },
-        { icon: HelpCircle, label: t("terms"), href: "#" },
-        { icon: HelpCircle, label: t("contact"), href: "#" },
+        { icon: HelpCircle, label: t("about"), href: `${base}/about` },
+        { icon: HelpCircle, label: t("privacy"), href: `${base}/privacy` },
+        { icon: HelpCircle, label: t("terms"), href: `${base}/terms` },
+        { icon: HelpCircle, label: t("contact"), href: `${base}/contact` },
       ],
+    },
+    {
+      title: "Info",
+      items: [{ icon: HelpCircle, label: "FAQ", href: `${base}/faq` }],
     },
     ...(showLoyalty
       ? [

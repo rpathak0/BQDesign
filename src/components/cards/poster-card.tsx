@@ -20,7 +20,7 @@ export function PosterCard({ movie }: PosterCardProps) {
         
         {/* Overlay on hover */}
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-          <button className="w-full py-3 bg-primary text-primary-foreground rounded-lg font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg">
+          <button className="w-full py-3 bg-white dark:bg-card text-primary border-2 border-primary rounded-lg font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg">
             Book Now
           </button>
         </div>

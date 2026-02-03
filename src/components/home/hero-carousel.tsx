@@ -1,10 +1,15 @@
+"use client";
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Movie } from "@/data/mockContent";
 import { Button } from "@/components/ui/button";
-import { Play, ChevronRight, ChevronLeft, Ticket } from "lucide-react";
+import { Play, ChevronRight, ChevronLeft } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { SafeImage } from "@/components/shared/safe-image";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { fadeUp } from "@/lib/motion-variants";
 
 interface HeroCarouselProps {
   movies: Movie[];
@@ -82,12 +87,19 @@ export function HeroCarousel({ movies }: HeroCarouselProps) {
   const scrollNext = useCallback(() => mainApi && mainApi.scrollNext(), [mainApi]);
 
   const currentMovie = movies[selectedIndex];
+  const reduced = usePrefersReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const backgroundScale = useTransform(scrollYProgress, [0, 0.15], [1, reduced ? 1 : 1.04]);
 
   return (
     <section className="relative w-full h-[460px] md:h-screen min-h-[420px] overflow-hidden bg-black mb-0">
       
       {/* Main Background Carousel */}
-      <div className="absolute inset-0 z-0" ref={mainRef}>
+      <motion.div
+        className="absolute inset-0 z-0"
+        ref={mainRef}
+        style={{ scale: backgroundScale }}
+      >
         <div className="flex h-full">
           {movies.map((movie, index) => (
             <div key={movie.id} className="relative flex-[0_0_100%] min-w-0 h-full">
@@ -128,13 +140,19 @@ export function HeroCarousel({ movies }: HeroCarouselProps) {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Content Container */}
-      <div className="relative z-20 container mx-auto px-4 h-full flex flex-col md:flex-row items-end pb-8 md:pb-24 pt-10 md:pt-0 pointer-events-none">
+      <div className="relative z-20 container mx-auto h-full flex flex-col md:flex-row items-end pb-8 md:pb-24 pt-10 md:pt-0 pointer-events-none">
         
-        {/* Left Content (Text) - Adjusted width and text size for iPad */}
-        <div className="w-full md:w-[50%] lg:w-[35%] mb-8 md:mb-0 space-y-6 animate-in fade-in slide-in-from-left rtl:slide-in-from-right duration-500 z-30 pointer-events-auto bg-gradient-to-r rtl:bg-gradient-to-l from-black/80 to-transparent md:pr-8 rtl:md:pr-0 rtl:md:pl-8 rounded-2xl md:rounded-xl p-4 md:p-0 text-left rtl:text-right">
+        {/* Left Content (Text) - entrance + CTA micro-interactions */}
+        <motion.div
+          className="w-full md:w-[50%] lg:w-[35%] mb-8 md:mb-0 space-y-6 z-30 pointer-events-auto bg-gradient-to-r rtl:bg-gradient-to-l from-black/80 to-transparent md:pr-8 rtl:md:pr-0 rtl:md:pl-8 rounded-2xl md:rounded-xl p-4 md:p-0 text-left rtl:text-right"
+          variants={reduced ? undefined : fadeUp}
+          initial={reduced ? false : "hidden"}
+          animate="visible"
+          transition={reduced ? { duration: 0 } : { duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
            <div className="space-y-4 md:space-y-6">
              <div className="hidden md:flex flex-wrap gap-2 mb-4">
                 {currentMovie?.tags.map((tag) => (
@@ -154,15 +172,22 @@ export function HeroCarousel({ movies }: HeroCarouselProps) {
              </p>
 
              <div className="hidden md:flex items-center gap-4 pt-4">
-               <Button className="bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black font-bold rounded-full px-6 py-6 md:px-8 md:py-7 text-base md:text-lg shadow-[0_0_20px_rgba(255,221,0,0.4)]">
-                 Book Now
-               </Button>
-               <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white rounded-full px-4 py-6 md:px-6 md:py-7 text-base md:text-lg font-medium gap-2">
-                 <Play className="fill-white w-4 h-4 rtl:rotate-180" /> Watch Trailer
-               </Button>
+               <motion.div whileHover={reduced ? undefined : { scale: 1.02 }} whileTap={reduced ? undefined : { scale: 0.98 }}>
+                 <Button
+                   variant="ghost"
+                   className="bg-[#ffdd00] dark:bg-[#ffdd00] hover:bg-[#ffdd00]/90 dark:hover:bg-[#ffdd00]/90 text-black dark:text-black border-2 border-[#ffdd00] dark:border-[#ffdd00] font-bold rounded-full px-6 py-6 md:px-8 md:py-7 text-base md:text-lg shadow-[0_0_20px_rgba(255,221,0,0.4)]"
+                 >
+                   Book Now
+                 </Button>
+               </motion.div>
+               <motion.div whileHover={reduced ? undefined : { scale: 1.02 }} whileTap={reduced ? undefined : { scale: 0.98 }}>
+                 <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white rounded-full px-4 py-6 md:px-6 md:py-7 text-base md:text-lg font-medium gap-2">
+                   <Play className="fill-white w-4 h-4 rtl:rotate-180" /> Watch Trailer
+                 </Button>
+               </motion.div>
              </div>
            </div>
-        </div>
+        </motion.div>
 
         {/* Right Content (Thumbnail Deck) */}
         <div className="hidden md:flex w-full md:w-[50%] lg:w-[65%] flex-col items-end rtl:items-start justify-end gap-8 pointer-events-auto pl-4 lg:pl-8 rtl:pl-0 rtl:pr-4 rtl:lg:pr-8 absolute bottom-12 right-0 rtl:right-auto rtl:left-0 md:right-0 rtl:md:right-auto rtl:md:left-0 max-w-[700px] overflow-hidden pr-4 rtl:pr-0 rtl:pl-4">

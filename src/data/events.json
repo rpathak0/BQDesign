@@ -1,0 +1,282 @@
+[
+  {
+    "id": "e1",
+    "slug": "lusail-winter-wonderland",
+    "title": "Lusail Winter Wonderland",
+    "date": "Open Daily",
+    "location": "Al Maha Island",
+    "image": "/assets/hero-bg.png",
+    "price": "From AED 150",
+    "priceFrom": 150,
+    "category": "Attraction",
+    "tags": ["Family", "Outdoor"],
+    "status": "best-seller",
+    "rating": 4.8,
+    "ratingCount": 1247,
+    "description": "Experience a magical winter wonderland at Lusail with ice skating, festive markets, live entertainment, and family-friendly attractions. Perfect for all ages.",
+    "highlights": [
+      "Ice skating rink",
+      "Festive markets & food stalls",
+      "Live shows and performances",
+      "Santa's grotto and meet & greet",
+      "Fireworks on select nights"
+    ],
+    "inclusions": [
+      "Entry ticket",
+      "Access to ice skating rink (skate hire extra)",
+      "All live shows and entertainment"
+    ],
+    "exclusions": [
+      "Food and beverages",
+      "Skate hire",
+      "Optional rides and games"
+    ],
+    "importantNotes": "Dress warmly. Last entry 1 hour before closing. No outside food or drink.",
+    "cancellationPolicy": "Free cancellation up to 24 hours before start. No refunds within 24 hours.",
+    "openingHours": "Sun–Thu 4pm–10pm, Fri–Sat 2pm–11pm",
+    "lat": 25.4210,
+    "lng": 51.4912,
+    "images": ["/assets/hero-bg.png", "/assets/hero-bg.png", "/assets/hero-bg.png"],
+    "reviews": [
+      { "id": "r1", "author": "Sarah M.", "rating": 5, "date": "2025-01-15", "text": "Amazing experience for the whole family. The ice rink was well maintained and the atmosphere was magical." },
+      { "id": "r2", "author": "Ahmed K.", "rating": 4, "date": "2025-01-10", "text": "Great value for money. Only downside was the queues for food stalls. Book in advance for popular time slots." }
+    ],
+    "ticketCategories": [
+      { "id": "cat1", "name": "Category 1 All ages", "price": 150, "currency": "AED", "sellingFast": true },
+      { "id": "cat2", "name": "Category 2 All ages", "price": 200, "currency": "AED", "sellingFast": false },
+      { "id": "cat3", "name": "Category 3 Family pack", "price": 500, "currency": "AED", "minQty": 2, "sellingFast": false }
+    ],
+    "dateTimeOptions": [
+      {
+        "date": "Thu 6 Feb",
+        "dateKey": "2025-02-06",
+        "fromPrice": 135,
+        "timeSlots": [
+          { "id": "d1t1", "start": "06:00", "end": "07:00", "price": 135, "currency": "QAR", "soldOut": true },
+          { "id": "d1t2", "start": "07:00", "end": "09:00", "price": 135, "currency": "QAR", "soldOut": true },
+          { "id": "d1t3", "start": "16:00", "end": "17:00", "price": 135, "currency": "QAR", "soldOut": false, "fastSelling": true }
+        ]
+      },
+      {
+        "date": "Fri 7 Feb",
+        "dateKey": "2025-02-07",
+        "fromPrice": 150,
+        "timeSlots": [
+          { "id": "t1", "start": "16:00", "end": "20:00", "label": "Afternoon slot", "price": 150, "currency": "AED", "soldOut": false, "fastSelling": true },
+          { "id": "t2", "start": "20:00", "end": "23:00", "label": "Evening slot", "price": 150, "currency": "AED", "soldOut": false }
+        ]
+      },
+      {
+        "date": "Sat 8 Feb",
+        "dateKey": "2025-02-08",
+        "fromPrice": 150,
+        "timeSlots": [
+          { "id": "t3", "start": "10:00", "end": "14:00", "label": "Morning", "price": 150, "currency": "AED", "soldOut": true },
+          { "id": "t4", "start": "15:00", "end": "19:00", "label": "Afternoon Tour", "price": 150, "currency": "AED", "soldOut": false, "fastSelling": true }
+        ]
+      },
+      {
+        "date": "Sun 9 Feb",
+        "dateKey": "2025-02-09",
+        "fromPrice": 150,
+        "timeSlots": [
+          { "id": "d4t1", "start": "10:00", "end": "14:00", "price": 150, "currency": "AED", "soldOut": true },
+          { "id": "d4t2", "start": "14:00", "end": "18:00", "price": 150, "currency": "AED", "soldOut": false },
+          { "id": "d4t3", "start": "18:00", "end": "22:00", "price": 150, "currency": "AED", "soldOut": false, "fastSelling": true }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "e2",
+    "slug": "disney-on-ice",
+    "title": "Disney on Ice",
+    "date": "Jan 25 - Feb 5",
+    "location": "Etihad Arena",
+    "image": "/assets/hero-bg.png",
+    "price": "From AED 200",
+    "priceFrom": 200,
+    "category": "Show",
+    "tags": ["Kids", "Performance"],
+    "status": "fast-selling",
+    "rating": 4.9,
+    "ratingCount": 892,
+    "description": "Disney on Ice brings your favourite characters to the ice in an unforgettable show. Sing along to classic songs and watch stunning choreography.",
+    "highlights": [
+      "Classic Disney characters on ice",
+      "Stunning choreography and costumes",
+      "Hit songs from Frozen, Moana, and more",
+      "Family-friendly duration"
+    ],
+    "inclusions": [
+      "Admission ticket",
+      "Assigned seat"
+    ],
+    "exclusions": [
+      "Merchandise",
+      "Food and drinks"
+    ],
+    "importantNotes": "Doors open 60 minutes before show. No flash photography.",
+    "cancellationPolicy": "No refunds. Exchanges subject to availability and fee.",
+    "openingHours": "Show times vary; check booking for exact times.",
+    "lat": 24.4883,
+    "lng": 54.6104,
+    "images": ["/assets/hero-bg.png", "/assets/hero-bg.png"],
+    "reviews": [
+      { "id": "r3", "author": "Layla H.", "rating": 5, "date": "2025-01-20", "text": "My kids were mesmerized. The production quality was outstanding. Worth every dirham." }
+    ],
+    "hasSeatingLayout": true,
+    "seatingLayout": {
+      "tiers": [
+        { "id": "t1", "label": "195 AED", "price": 195, "currency": "AED", "color": "bg-cyan-400" },
+        { "id": "t2", "label": "295 AED", "price": 295, "currency": "AED", "color": "bg-blue-500" },
+        { "id": "t3", "label": "395 AED", "price": 395, "currency": "AED", "color": "bg-violet-500" },
+        { "id": "t4", "label": "420 AED", "price": 420, "currency": "AED", "color": "bg-rose-400" },
+        { "id": "t5", "label": "495 AED", "price": 495, "currency": "AED", "color": "bg-red-500" }
+      ],
+      "sections": [
+        { "id": "s1", "name": "Lower tier", "tierId": "t1", "rows": 4, "seatsPerRow": 12, "startRowLabel": "A" },
+        { "id": "s2", "name": "Mid tier", "tierId": "t2", "rows": 4, "seatsPerRow": 14, "startRowLabel": "E" },
+        { "id": "s3", "name": "Upper tier", "tierId": "t3", "rows": 3, "seatsPerRow": 16, "startRowLabel": "I" },
+        { "id": "s4", "name": "VIP", "tierId": "t5", "rows": 2, "seatsPerRow": 8, "startRowLabel": "L" }
+      ]
+    },
+    "dateTimeOptions": [
+      {
+        "date": "Thu 30 Jan",
+        "dateKey": "2025-01-30",
+        "fromPrice": 195,
+        "timeSlots": [
+          { "id": "d1t1", "start": "18:00", "end": "20:00", "price": 195, "currency": "AED", "soldOut": false },
+          { "id": "d1t2", "start": "20:30", "end": "22:30", "price": 195, "currency": "AED", "soldOut": false }
+        ]
+      },
+      {
+        "date": "Fri 31 Jan",
+        "dateKey": "2025-01-31",
+        "fromPrice": 195,
+        "timeSlots": [
+          { "id": "d2t1", "start": "18:00", "end": "20:00", "price": 195, "currency": "AED", "soldOut": false }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "e3",
+    "slug": "formula-1-grand-prix",
+    "title": "Formula 1 Grand Prix",
+    "date": "Nov 24-26",
+    "location": "Yas Marina Circuit",
+    "image": "/assets/hero-bg.png",
+    "price": "From AED 999",
+    "priceFrom": 999,
+    "category": "Sports",
+    "tags": ["Racing", "Live"],
+    "status": "limited-slots",
+    "rating": 4.7,
+    "ratingCount": 2103,
+    "description": "The Abu Dhabi Grand Prix at Yas Marina Circuit. Three days of F1 action, support races, and off-track entertainment.",
+    "highlights": [
+      "F1 race weekend",
+      "Support races and concerts",
+      "Paddock and fan zone access (tier-dependent)",
+      "World-class facilities"
+    ],
+    "inclusions": [
+      "Grandstand or general admission (per ticket type)",
+      "Access to designated zones"
+    ],
+    "exclusions": [
+      "Hospitality and VIP",
+      "Parking",
+      "Food and merchandise"
+    ],
+    "importantNotes": "Strict security. Check prohibited items list. Gates open early.",
+    "cancellationPolicy": "No refunds. Ticket protection available at checkout.",
+    "openingHours": "Gates open 8am; schedule varies by day.",
+    "lat": 24.4672,
+    "lng": 54.6035,
+    "images": ["/assets/hero-bg.png", "/assets/hero-bg.png", "/assets/hero-bg.png", "/assets/hero-bg.png"],
+    "reviews": [
+      { "id": "r4", "author": "Omar S.", "rating": 5, "date": "2024-12-01", "text": "Bucket list experience. Organisation was top notch. Will come again." }
+    ]
+  },
+  {
+    "id": "e4",
+    "slug": "desert-safari-adventure",
+    "title": "Desert Safari Adventure",
+    "date": "Daily",
+    "location": "Red Dunes",
+    "image": "/assets/hero-bg.png",
+    "price": "From AED 150",
+    "priceFrom": 150,
+    "category": "Adventure",
+    "tags": ["Tourism"],
+    "status": "new",
+    "rating": 4.6,
+    "ratingCount": 567,
+    "description": "Dune bashing, camel rides, BBQ dinner, and traditional entertainment. A must-do desert experience.",
+    "highlights": [
+      "Dune bashing in 4x4",
+      "Camel ride",
+      "BBQ dinner and live entertainment",
+      "Henna and photo opportunities"
+    ],
+    "inclusions": [
+      "Hotel pickup and drop-off (selected areas)",
+      "Dune bashing",
+      "Camel ride",
+      "Dinner and soft drinks"
+    ],
+    "exclusions": [
+      "Alcoholic beverages",
+      "Quad bike (optional add-on)"
+    ],
+    "importantNotes": "Not suitable for pregnant guests or serious back/neck conditions. Wear comfortable clothes.",
+    "cancellationPolicy": "Free cancellation up to 24 hours. No show no refund.",
+    "openingHours": "Afternoon and evening slots; exact time confirmed after booking.",
+    "lat": 24.8607,
+    "lng": 55.2662,
+    "images": ["/assets/hero-bg.png", "/assets/hero-bg.png"],
+    "reviews": []
+  },
+  {
+    "id": "e5",
+    "slug": "museum-of-the-future",
+    "title": "Museum of the Future",
+    "date": "Daily Slots",
+    "location": "Sheikh Zayed Road",
+    "image": "/assets/hero-bg.png",
+    "price": "AED 145",
+    "priceFrom": 145,
+    "category": "Attraction",
+    "tags": ["Culture", "Tech"],
+    "status": "best-seller",
+    "rating": 4.8,
+    "ratingCount": 3421,
+    "description": "Explore the future of technology, sustainability, and society in one of the world's most iconic buildings.",
+    "highlights": [
+      "Immersive future-themed exhibits",
+      "OOTW (Office of the Future) and other zones",
+      "Stunning architecture",
+      "Timed entry for comfort"
+    ],
+    "inclusions": [
+      "General admission",
+      "Access to all public exhibits"
+    ],
+    "exclusions": [
+      "Guided tours (optional)",
+      "Cafe and shop"
+    ],
+    "importantNotes": "Strict timed entry. Arrive within your slot. No large bags.",
+    "cancellationPolicy": "Reschedule free once; no refunds.",
+    "openingHours": "10am–7:30pm (last entry 6pm). Closed Tue.",
+    "lat": 25.0782,
+    "lng": 55.2720,
+    "images": ["/assets/hero-bg.png", "/assets/hero-bg.png", "/assets/hero-bg.png"],
+    "reviews": [
+      { "id": "r5", "author": "Nadia F.", "rating": 5, "date": "2025-01-18", "text": "Mind-blowing. Book early – slots sell out. Allow 3+ hours." }
+    ]
+  }
+]

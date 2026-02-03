@@ -13,13 +13,14 @@ export function LanguageSwitcher() {
       size="sm" 
       onClick={toggleLanguage}
       className={cn(
-        "rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-xs font-medium px-3 h-8 gap-1",
-        "text-white/90 hover:text-white"
+        "rounded-full text-xs font-medium px-3 h-8 gap-1",
+        "border-current/20 bg-current/5 hover:bg-current/10 text-current",
+        "opacity-90 hover:opacity-100"
       )}
     >
-      <span className={cn(language === "en" ? "text-white" : "text-white/50")}>ENG</span>
-      <span className="text-white/30">/</span>
-      <span className={cn("font-arabic", language === "ar" ? "text-white" : "text-white/50")}>العربية</span>
+      <span className={cn(language === "en" ? "opacity-100" : "opacity-50")}>ENG</span>
+      <span className="opacity-30">/</span>
+      <span className={cn("font-arabic", language === "ar" ? "opacity-100" : "opacity-50")}>العربية</span>
     </Button>
   );
 }

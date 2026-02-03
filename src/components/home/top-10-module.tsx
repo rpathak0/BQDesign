@@ -20,7 +20,7 @@ export function Top10Module() {
 
   return (
     <section className="bg-black dark:bg-black pt-10 md:pt-12 pb-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <h2 className="text-3xl font-display font-bold text-white mb-6">Top 10 Movies</h2>
 
         <div className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#0f1f15] to-black border border-white/5 shadow-2xl h-[500px] md:h-[600px] group">
