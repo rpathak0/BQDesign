@@ -22,8 +22,8 @@ export function ContentRail({ title, children, action, rows = 1 }: ContentRailPr
   };
 
   return (
-    <div className="py-6 md:py-8 space-y-6">
-      <div className="container mx-auto flex items-center justify-between gap-3">
+    <div className="py-6 md:py-8 space-y-6 container mx-auto pl-4 sm:pl-5 md:pl-6 pr-6 sm:pr-8 md:pr-10 w-full max-w-[100vw]">
+      <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
           <h2 className="text-xl md:text-3xl font-display font-bold tracking-tight md:whitespace-nowrap">
             {title}
@@ -66,16 +66,19 @@ export function ContentRail({ title, children, action, rows = 1 }: ContentRailPr
         </div>
       </div>
 
-      <div 
+      <div className="w-full min-w-0">
+      <div
         ref={scrollRef}
         className={cn(
-          "pb-6 md:pb-8 container mx-auto no-scrollbar snap-x overflow-x-auto",
-          rows === 1 
-            ? "flex gap-4 md:gap-6" 
-            : "grid grid-rows-2 grid-flow-col gap-4 auto-cols-max"
+          "pb-6 md:pb-8 no-scrollbar snap-x overflow-x-auto w-full min-w-0",
+          "pr-8 sm:pr-10 md:pr-12",
+          rows === 1
+            ? "flex gap-4 md:gap-6 pr-8 sm:pr-10 md:pr-14"
+            : "grid grid-rows-2 grid-flow-col gap-4 auto-cols-max pr-8 sm:pr-10 md:pr-14"
         )}
       >
         {children}
+      </div>
       </div>
     </div>
   );

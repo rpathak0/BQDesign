@@ -67,26 +67,26 @@ export function EventDetailView({ event }: { event: EventDetail }) {
           animate={{ opacity: 1 }}
           className="mb-4 md:mb-6 flex flex-wrap items-center justify-between gap-3"
         >
-          <nav className="text-sm text-muted-foreground flex flex-wrap items-center gap-x-1 gap-y-1 min-w-0" aria-label="Breadcrumb">
-            <Link href={`/${locale}`} className="hover:text-foreground">
+          <nav className="text-sm text-black/80 dark:text-muted-foreground flex flex-wrap items-center gap-x-1 gap-y-1 min-w-0" aria-label="Breadcrumb">
+            <Link href={`/${locale}`} className="hover:text-black dark:hover:text-foreground">
               Home
             </Link>
             <span>/</span>
-            <Link href={`/${locale}/events`} className="hover:text-foreground">
+            <Link href={`/${locale}/events`} className="hover:text-black dark:hover:text-foreground">
               Events
             </Link>
             {event.category && (
               <>
                 <span>/</span>
-                <Link href={`/${locale}/categories?q=${encodeURIComponent(event.category)}`} className="hover:text-foreground">
+                <Link href={`/${locale}/categories?q=${encodeURIComponent(event.category)}`} className="hover:text-black dark:hover:text-foreground">
                   {event.category}
                 </Link>
               </>
             )}
             <span>/</span>
-            <span className="text-foreground line-clamp-1">{event.title}</span>
+            <span className="text-black dark:text-foreground line-clamp-1">{event.title}</span>
           </nav>
-          <div className="flex items-center gap-3 shrink-0 text-sm text-foreground">
+          <div className="flex items-center gap-3 shrink-0 text-sm text-black dark:text-foreground">
             <button
               type="button"
               className="flex items-center gap-1.5 hover:text-primary transition-colors"
@@ -126,11 +126,11 @@ export function EventDetailView({ event }: { event: EventDetail }) {
               transition={{ duration: 0.3, delay: 0.05 }}
               className="mb-4"
             >
-              <h1 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-1">
+              <h1 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-1 text-black dark:text-foreground">
                 {event.title}
               </h1>
               {description.length > 0 && (
-                <p className="text-muted-foreground text-base mb-2">
+                <p className="text-black/80 dark:text-muted-foreground text-base mb-2">
                   {description.split(/[.!?]/)[0].trim()}
                   {/[.!?]/.test(description) ? "." : ""}
                 </p>
@@ -153,7 +153,7 @@ export function EventDetailView({ event }: { event: EventDetail }) {
               <div className="flex items-center gap-2">
                 <Star className="w-5 h-5 fill-primary text-primary" />
                 <span className="font-display font-bold text-lg">{event.rating.toFixed(1)}</span>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-sm text-black/80 dark:text-muted-foreground">
                   {event.rating >= 4.5 ? "Excellent" : event.rating >= 4 ? "Very Good" : "Good"}
                 </span>
               </div>
@@ -163,13 +163,13 @@ export function EventDetailView({ event }: { event: EventDetail }) {
               >
                 {event.ratingCount} Reviews
               </Link>
-              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+              <div className="flex items-center gap-1.5 text-sm text-black/80 dark:text-muted-foreground">
                 <MapPin className="w-4 h-4 shrink-0 text-primary" />
                 <span>{event.location}</span>
               </div>
               <button
                 type="button"
-                className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+                className="flex items-center gap-1.5 text-sm text-black/80 dark:text-muted-foreground hover:text-black dark:hover:text-foreground"
                 aria-label="Share"
               >
                 <Share2 className="w-4 h-4" />
@@ -184,7 +184,7 @@ export function EventDetailView({ event }: { event: EventDetail }) {
               transition={{ duration: 0.3, delay: 0.1 }}
               className="mb-8"
             >
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+              <p className="text-black/80 dark:text-muted-foreground text-sm md:text-base leading-relaxed">
                 {descriptionText}
                 {showReadMore && !readMore && "…"}
               </p>
@@ -212,11 +212,11 @@ export function EventDetailView({ event }: { event: EventDetail }) {
               <Accordion type="multiple" className="w-full" defaultValue={["highlights", "inclusions", "exclusions"]}>
                 {event.highlights.length > 0 && (
                   <AccordionItem value="highlights">
-                    <AccordionTrigger className="text-left font-display font-semibold">
+                    <AccordionTrigger className="text-left font-display font-semibold text-black dark:text-foreground">
                       Highlights
                     </AccordionTrigger>
                     <AccordionContent>
-                      <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
+                      <ul className="list-disc list-inside space-y-1 text-black/80 dark:text-muted-foreground text-sm">
                         {event.highlights.map((h, i) => (
                           <li key={i}>{h}</li>
                         ))}
@@ -225,11 +225,11 @@ export function EventDetailView({ event }: { event: EventDetail }) {
                   </AccordionItem>
                 )}
                 <AccordionItem value="inclusions">
-                  <AccordionTrigger className="text-left font-display font-semibold">
+                  <AccordionTrigger className="text-left font-display font-semibold text-black dark:text-foreground">
                     Inclusions
                   </AccordionTrigger>
                   <AccordionContent>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
+                    <ul className="list-disc list-inside space-y-1 text-black/80 dark:text-muted-foreground text-sm">
                       {event.inclusions.map((x, i) => (
                         <li key={i}>{x}</li>
                       ))}
@@ -237,11 +237,11 @@ export function EventDetailView({ event }: { event: EventDetail }) {
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="exclusions">
-                  <AccordionTrigger className="text-left font-display font-semibold">
+                  <AccordionTrigger className="text-left font-display font-semibold text-black dark:text-foreground">
                     Exclusions
                   </AccordionTrigger>
                   <AccordionContent>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
+                    <ul className="list-disc list-inside space-y-1 text-black/80 dark:text-muted-foreground text-sm">
                       {event.exclusions.map((x, i) => (
                         <li key={i}>{x}</li>
                       ))}
@@ -250,31 +250,31 @@ export function EventDetailView({ event }: { event: EventDetail }) {
                 </AccordionItem>
                 {event.importantNotes && (
                   <AccordionItem value="notes">
-                    <AccordionTrigger className="text-left font-display font-semibold">
+                    <AccordionTrigger className="text-left font-display font-semibold text-black dark:text-foreground">
                       Know before you go
                     </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground text-sm whitespace-pre-line">
+                    <AccordionContent className="text-black/80 dark:text-muted-foreground text-sm whitespace-pre-line">
                       {event.importantNotes}
                     </AccordionContent>
                   </AccordionItem>
                 )}
                 {event.cancellationPolicy && (
                   <AccordionItem value="cancellation">
-                    <AccordionTrigger className="text-left font-display font-semibold">
+                    <AccordionTrigger className="text-left font-display font-semibold text-black dark:text-foreground">
                       Cancellation policy
                     </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground text-sm">
-                      {event.cancellationPolicy}
+<AccordionContent className="text-black/80 dark:text-muted-foreground text-sm">
+                    {event.cancellationPolicy}
                     </AccordionContent>
                   </AccordionItem>
                 )}
                 <AccordionItem value="how-to-get-there">
-                  <AccordionTrigger className="text-left font-display font-semibold">
+                  <AccordionTrigger className="text-left font-display font-semibold text-black dark:text-foreground">
                     How to get there
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Use the map below for directions. Address: {event.location}.
+<p className="text-sm text-black/80 dark:text-muted-foreground mb-3">
+                    Use the map below for directions. Address: {event.location}.
                     </p>
                     <MapEmbed lat={event.lat} lng={event.lng} title="" className="mt-2" />
                   </AccordionContent>
@@ -290,7 +290,7 @@ export function EventDetailView({ event }: { event: EventDetail }) {
               className="py-8"
             >
               <div className="flex items-center justify-between mb-3">
-                <h2 className="font-display font-semibold text-lg">Gallery</h2>
+                <h2 className="font-display font-semibold text-lg text-black dark:text-foreground">Gallery</h2>
                 <span className="text-sm text-primary font-medium cursor-pointer hover:underline">Show more</span>
               </div>
               <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
@@ -317,8 +317,8 @@ export function EventDetailView({ event }: { event: EventDetail }) {
               transition={{ duration: 0.3, delay: 0.16 }}
               className="pb-8"
             >
-              <h2 className="font-display font-semibold text-lg mb-3">Location</h2>
-              <p className="text-sm text-muted-foreground mb-1">{event.location}</p>
+              <h2 className="font-display font-semibold text-lg mb-3 text-black dark:text-foreground">Location</h2>
+              <p className="text-sm text-black/80 dark:text-muted-foreground mb-1">{event.location}</p>
               <a href="#location" className="text-sm text-primary font-medium hover:underline">
                 View on map
               </a>
@@ -334,7 +334,7 @@ export function EventDetailView({ event }: { event: EventDetail }) {
               transition={{ duration: 0.3, delay: 0.17 }}
               className="pb-8"
             >
-              <h2 className="font-display font-semibold text-lg mb-4">
+              <h2 className="font-display font-semibold text-lg mb-4 text-black dark:text-foreground">
                 {event.title} Ticket prices
               </h2>
               {event.ticketCategories && event.ticketCategories.length > 0 ? (
@@ -344,8 +344,8 @@ export function EventDetailView({ event }: { event: EventDetail }) {
                       key={cat.id}
                       className="flex items-center justify-between rounded-xl border border-border/50 bg-muted/30 px-4 py-3"
                     >
-                      <span className="font-medium text-sm">{cat.name}</span>
-                      <span className="font-display font-semibold">
+                      <span className="font-medium text-sm text-black dark:text-foreground">{cat.name}</span>
+                      <span className="font-display font-semibold text-black dark:text-foreground">
                         {typeof cat.price === "number" ? `${cat.price} ${cat.currency ?? "QAR"}` : cat.price}
                       </span>
                     </div>
@@ -353,8 +353,8 @@ export function EventDetailView({ event }: { event: EventDetail }) {
                 </div>
               ) : (
                 <div className="flex items-center justify-between rounded-xl border border-border/50 bg-muted/30 px-4 py-3">
-                  <span className="font-medium text-sm">General admission</span>
-                  <span className="font-display font-semibold">{event.price}</span>
+                  <span className="font-medium text-sm text-black dark:text-foreground">General admission</span>
+                  <span className="font-display font-semibold text-black dark:text-foreground">{event.price}</span>
                 </div>
               )}
             </motion.section>
@@ -384,7 +384,7 @@ export function EventDetailView({ event }: { event: EventDetail }) {
                 className="pb-12"
               >
                 <div className="flex items-center justify-between gap-4 mb-4">
-                  <h2 className="font-display font-semibold text-lg">You might also like</h2>
+                  <h2 className="font-display font-semibold text-lg text-black dark:text-foreground">You might also like</h2>
                   <div className="flex gap-2 shrink-0">
                     <Button
                       variant="outline"

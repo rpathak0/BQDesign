@@ -64,14 +64,14 @@ export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
 
   return (
     <section 
-        className="container mx-auto pt-10 md:pt-12 mb-16"
+        className="container mx-auto pt-10 md:pt-12 mb-16 pl-4 sm:pl-5 md:pl-6 pr-6 sm:pr-8 md:pr-10"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-display font-bold text-black dark:text-white">Offers & Promotions</h2>
+      <div className="flex items-center justify-between gap-4 mb-8">
+        <h2 className="text-3xl font-display font-bold text-black dark:text-white min-w-0">Offers & Promotions</h2>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 shrink-0">
              {/* Navigation Buttons */}
              <div className="flex gap-2">
                 <Button 
@@ -104,13 +104,15 @@ export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
       
       <div 
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto pb-8 no-scrollbar snap-x"
+        className="flex gap-6 overflow-x-auto pb-8 no-scrollbar snap-x pr-6 sm:pr-8 md:pr-10"
       >
+           <div className="flex gap-6 pr-10 sm:pr-12 md:pr-16">
            {offers.map(offer => (
               <div key={offer.id} className="snap-start shrink-0">
                   <OfferCard offer={offer} />
               </div>
           ))}
+           </div>
       </div>
     </section>
   );

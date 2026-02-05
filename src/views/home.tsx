@@ -48,8 +48,8 @@ function CategoriesStagger({ categories, reduced, base }: { categories: typeof C
   const childVariants = reduced ? {} : staggerChild;
   return (
     <>
-      <div className="md:hidden -mx-4 px-4 overflow-x-auto no-scrollbar">
-        <div className="flex gap-6">
+      <div className="md:hidden overflow-x-auto no-scrollbar pr-6 sm:pr-8 md:pr-10">
+        <div className="flex gap-6 pr-10 sm:pr-12 md:pr-16">
           {categories.map((category) => (
             <Link key={category.id} href={`${base}/categories${category.name ? `?category=${encodeURIComponent(category.name)}` : ""}`} className="shrink-0 w-[120px] flex justify-center" data-testid={`card-category-${category.id}`}>
               <CategoryCircle category={category} />
@@ -131,23 +131,22 @@ export default function Home() {
           );
   
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col overflow-x-hidden w-full max-w-[100vw]">
       <Navbar onAiClick={() => setIsAiOpen(true)} />
       <div className="hidden md:block">
         <QuickBookTab />
       </div>
       
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-[100vw] overflow-x-hidden pr-5 sm:pr-6 md:pr-8">
         <HeroCarousel movies={MOVIES} />
         
         {/* AI Search Stub Removed from here as requested */}
         
         <FloatingControls isOpen={isAiOpen} onClose={() => setIsAiOpen(false)} onOpen={() => setIsAiOpen(true)} />
         
-        {/* Things to do header + Filters */}
-        <div className="container mx-auto mt-12 md:mt-16 mb-8">
-
-            <div className="flex flex-col gap-3 border-b border-border/20 pb-4">
+        {/* Things to do header + Filters + Categories (one padded block so carousel aligns with title) */}
+        <div className="container mx-auto mt-12 md:mt-16 mb-16 md:mb-20 w-full max-w-[100vw] pl-4 sm:pl-5 md:pl-6 pr-6 sm:pr-8 md:pr-10">
+            <div className="flex flex-col gap-3 border-b border-border/20 pb-4 mb-6">
               <div className="flex items-end justify-between gap-4">
                 <div className="shrink-0 min-w-0">
                   <div className="flex flex-row items-baseline gap-2 mb-1 flex-wrap">
@@ -184,12 +183,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-        </div>
-
-        {/* Categories - stagger on scroll */}
-        <section className="container mx-auto mb-16 md:mb-20">
           <CategoriesStagger categories={CATEGORIES} reduced={reduced} base={base} />
-        </section>
+        </div>
 
         {/* Gradient Container 1: Top Events & Attractions */}
         <div className="relative py-12 md:py-16">
@@ -223,7 +218,7 @@ export default function Home() {
         </div>
 
         {/* Popular Artists */}
-        <section className="container mx-auto py-8 bg-secondary/10 rounded-3xl mb-8">
+        <section className="container mx-auto py-8 bg-secondary/10 rounded-3xl mb-8 pl-4 sm:pl-5 md:pl-6 pr-6 sm:pr-8 md:pr-10">
           <div className="flex items-center justify-between gap-3 mb-6">
              <h2 className="text-2xl md:text-3xl font-display font-bold whitespace-nowrap">
                {t('popularArtists')}
@@ -238,8 +233,8 @@ export default function Home() {
                </Button>
              </Link>
           </div>
-          <div className="md:hidden -mx-4 px-4 overflow-x-auto no-scrollbar">
-            <div className="flex gap-6">
+          <div className="md:hidden overflow-x-auto no-scrollbar pr-6 sm:pr-8 md:pr-10">
+            <div className="flex gap-6 pr-10 sm:pr-12 md:pr-16">
               {ARTISTS.map((artist) => (
                 <div
                   key={artist.id}
@@ -383,7 +378,7 @@ export default function Home() {
         <section className="relative py-12 md:py-16">
 
           <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#020617] to-[#020617]" />
-          <div className="relative container mx-auto space-y-8">
+          <div className="relative container mx-auto space-y-8 px-4 sm:px-5 md:px-6">
             {/* Movies heading */}
             <div className="flex items-baseline justify-between gap-3">
               <div className="min-w-0">

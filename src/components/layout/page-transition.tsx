@@ -15,7 +15,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const variants = noMotionVariants;
 
   return (
-    <div className="min-h-full">
+    <div className="min-h-full w-full max-w-[100vw] overflow-x-hidden">
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={pathname}

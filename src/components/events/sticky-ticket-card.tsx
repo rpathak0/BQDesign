@@ -60,21 +60,21 @@ export function StickyTicketCard({
       <Card className="border-border/50 shadow-lg overflow-hidden rounded-2xl">
         <CardHeader className="pb-4">
           {title && (
-            <h3 className="font-display font-bold text-base text-muted-foreground line-clamp-1 mb-2">
+            <h3 className="font-display font-bold text-base text-black/80 dark:text-muted-foreground line-clamp-1 mb-2">
               {title}
             </h3>
           )}
           {/* Top row: Price (left) + Select tickets button (right) */}
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-black/80 dark:text-muted-foreground">
                 {priceFrom != null ? "Price from:" : "Price:"}
               </p>
-              <p className="text-3xl font-display font-bold text-foreground tracking-tight mt-0.5">
+              <p className="text-3xl font-display font-bold text-black dark:text-foreground tracking-tight mt-0.5">
                 {price}
               </p>
               {priceSuffix && (
-                <p className="text-xs text-muted-foreground mt-1">{priceSuffix}</p>
+                <p className="text-xs text-black/80 dark:text-muted-foreground mt-1">{priceSuffix}</p>
               )}
             </div>
             <Button
@@ -92,17 +92,17 @@ export function StickyTicketCard({
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500 text-white">
               <CheckCircle className="w-4 h-4" />
             </span>
-            <span className="text-sm font-medium text-foreground">{confirmationNote}</span>
+            <span className="text-sm font-medium text-black dark:text-foreground">{confirmationNote}</span>
           </div>
 
           {promocodeLabel && (
-            <p className="text-sm text-muted-foreground">{promocodeLabel}</p>
+            <p className="text-sm text-black/80 dark:text-muted-foreground">{promocodeLabel}</p>
           )}
 
           {(durationValue || openingHours) && (
             <div className="pt-3 border-t border-border/50">
-              <h4 className="text-sm font-display font-semibold mb-1">{durationLabel}</h4>
-              <div className="flex items-start gap-2 text-sm text-muted-foreground">
+              <h4 className="text-sm font-display font-semibold mb-1 text-black dark:text-foreground">{durationLabel}</h4>
+              <div className="flex items-start gap-2 text-sm text-black/80 dark:text-muted-foreground">
                 <Clock className="w-4 h-4 shrink-0 mt-0.5 text-primary" />
                 <span>{durationValue ?? openingHours}</span>
               </div>
@@ -110,10 +110,10 @@ export function StickyTicketCard({
           )}
 
           <div className="pt-3 border-t border-border/50">
-            <h4 className="text-sm font-display font-semibold mb-2">Why buy with us?</h4>
+            <h4 className="text-sm font-display font-semibold mb-2 text-black dark:text-foreground">Why buy with us?</h4>
             <ul className="space-y-2">
               {WHY_BUY.map(({ icon: Icon, label }) => (
-                <li key={label} className="flex items-center gap-2 text-sm text-muted-foreground">
+                <li key={label} className="flex items-center gap-2 text-sm text-black/80 dark:text-muted-foreground">
                   <Icon className="w-4 h-4 shrink-0 text-primary" />
                   {label}
                 </li>
@@ -122,12 +122,12 @@ export function StickyTicketCard({
           </div>
 
           <div className="pt-3 border-t border-border/50">
-            <h4 className="text-sm font-display font-semibold mb-2">Flexible Payment Options</h4>
+            <h4 className="text-sm font-display font-semibold mb-2 text-black dark:text-foreground">Flexible Payment Options</h4>
             <div className="flex flex-wrap gap-2 items-center">
-              <span className="text-xs font-semibold text-muted-foreground border border-border rounded px-2 py-1">VISA</span>
-              <span className="text-xs font-semibold text-muted-foreground border border-border rounded px-2 py-1">Mastercard</span>
-              <span className="text-xs font-semibold text-muted-foreground border border-border rounded px-2 py-1">Apple Pay</span>
-              <span className="text-xs font-semibold text-muted-foreground border border-border rounded px-2 py-1">Google Pay</span>
+              <span className="text-xs font-semibold text-black/80 dark:text-muted-foreground border border-border rounded px-2 py-1">VISA</span>
+              <span className="text-xs font-semibold text-black/80 dark:text-muted-foreground border border-border rounded px-2 py-1">Mastercard</span>
+              <span className="text-xs font-semibold text-black/80 dark:text-muted-foreground border border-border rounded px-2 py-1">Apple Pay</span>
+              <span className="text-xs font-semibold text-black/80 dark:text-muted-foreground border border-border rounded px-2 py-1">Google Pay</span>
             </div>
           </div>
         </CardContent>

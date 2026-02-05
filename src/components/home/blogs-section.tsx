@@ -37,7 +37,7 @@ export function BlogsSection() {
   };
 
   return (
-    <section className="container mx-auto py-10 md:py-14">
+    <section className="container mx-auto py-10 md:py-14 pl-4 sm:pl-5 md:pl-6 pr-6 sm:pr-8 md:pr-10">
       <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
         <div>
           <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight whitespace-nowrap">
@@ -75,8 +75,8 @@ export function BlogsSection() {
         </div>
       </div>
 
-      <div ref={scrollRef} className="-mx-4 px-4 overflow-x-auto no-scrollbar">
-        <div className="flex gap-4 md:gap-6">
+      <div ref={scrollRef} className="overflow-x-auto no-scrollbar pr-6 sm:pr-8 md:pr-10">
+        <div className="flex gap-4 md:gap-6 pr-10 sm:pr-12 md:pr-16">
           {BLOGS.map((blog) => (
             <article
               key={blog.id}
