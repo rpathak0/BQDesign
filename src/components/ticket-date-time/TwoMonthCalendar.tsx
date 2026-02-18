@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { DayButton as RDPDayButton } from "react-day-picker";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import type { DayAvailability } from "./types";
@@ -76,22 +77,8 @@ export function TwoMonthCalendar({
       : undefined);
 
   const DayButton = React.useCallback(
-    function CustomDayButton({
-      day,
-      modifiers,
-      ...props
-    }: {
-      day: { date: Date };
-      modifiers: {
-        selected?: boolean;
-        disabled?: boolean;
-        outside?: boolean;
-        range_start?: boolean;
-        range_end?: boolean;
-        range_middle?: boolean;
-      };
-      [key: string]: unknown;
-    }) {
+    function CustomDayButton(props: React.ComponentProps<typeof RDPDayButton>) {
+      const { day, modifiers, ...rest } = props;
       const key = toDateKey(day.date);
       const info = dateInfoMap.get(key);
       const sub =
@@ -132,7 +119,7 @@ export function TwoMonthCalendar({
             !outside && !selected && !soldOut && "text-foreground"
           )}
           disabled={modifiers.disabled || soldOut}
-          {...props}
+          {...rest}
         >
           <span
             className={cn(

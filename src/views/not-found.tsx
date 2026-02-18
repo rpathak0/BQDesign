@@ -17,7 +17,7 @@ const orbVariants = {
   float: (i: number) => ({
     y: [0, -16, 0],
     x: [0, i % 2 === 0 ? 10 : -10, 0],
-    transition: { duration: 4 + i * 0.4, repeat: Infinity, ease: "easeInOut" },
+    transition: { duration: 4 + i * 0.4, repeat: Infinity, ease: "easeInOut" as const },
   }),
 };
 

@@ -13,12 +13,14 @@ import { fadeUp } from "@/lib/motion-variants";
 
 interface HeroCarouselProps {
   movies: Movie[];
+  /** When true, hero is inside a page content wrapper (e.g. home); content uses padding only, no inner container */
+  inset?: boolean;
 }
 
 // Placeholder video removed to avoid confusion with flower background
 const SAMPLE_VIDEO = ""; 
 
-export function HeroCarousel({ movies }: HeroCarouselProps) {
+export function HeroCarousel({ movies, inset }: HeroCarouselProps) {
   // Main carousel for the background and text
   const [mainRef, mainApi] = useEmblaCarousel({ loop: true, duration: 40 });
   // Thumbnails carousel for the right side
@@ -92,7 +94,7 @@ export function HeroCarousel({ movies }: HeroCarouselProps) {
   const backgroundScale = useTransform(scrollYProgress, [0, 0.15], [1, reduced ? 1 : 1.04]);
 
   return (
-    <section className="relative w-full max-w-[100vw] h-[460px] md:h-screen min-h-[420px] overflow-hidden bg-black mb-0">
+    <section className="relative w-full h-[460px] md:h-screen min-h-[420px] overflow-hidden bg-black mb-0">
       
       {/* Main Background Carousel */}
       <motion.div
@@ -142,12 +144,15 @@ export function HeroCarousel({ movies }: HeroCarouselProps) {
         </div>
       </motion.div>
 
-      {/* Content Container */}
-      <div className="relative z-20 container mx-auto h-full flex flex-col md:flex-row items-end pb-8 md:pb-24 pt-10 md:pt-0 pointer-events-none pr-5 md:pr-0 max-w-full w-full">
+      {/* Content Container - same left/right alignment as inner pages (no inner container when inset to avoid double padding) */}
+      <div className={cn(
+        "relative z-20 h-full flex flex-col md:flex-row items-end pb-8 md:pb-24 pt-10 md:pt-0 pointer-events-none w-full",
+        inset ? "px-4 sm:px-5 md:px-6" : "container mx-auto px-4 sm:px-5 md:px-6"
+      )}>
         
-        {/* Left Content (Text) - entrance + CTA micro-interactions */}
+        {/* Left Content (Text) - 100% on-page, left-aligned */}
         <motion.div
-          className="w-full md:w-[50%] lg:w-[35%] mb-8 md:mb-0 space-y-6 z-30 pointer-events-auto bg-gradient-to-r rtl:bg-gradient-to-l from-black/80 to-transparent md:pr-8 rtl:md:pr-0 rtl:md:pl-8 rounded-2xl md:rounded-xl pl-4 pr-5 md:p-0 text-left rtl:text-right min-w-0"
+          className="w-full md:w-[50%] lg:w-[35%] mb-8 md:mb-0 space-y-6 z-30 pointer-events-auto bg-gradient-to-r rtl:bg-gradient-to-l from-black/80 to-transparent md:pr-8 rtl:md:pr-0 rtl:md:pl-8 rounded-2xl md:rounded-xl text-left rtl:text-right min-w-0"
           variants={reduced ? undefined : fadeUp}
           initial={reduced ? false : "hidden"}
           animate="visible"
@@ -254,8 +259,8 @@ export function HeroCarousel({ movies }: HeroCarouselProps) {
         </div>
       </div>
 
-      {/* Mobile navigation + progress */}
-      <div className="md:hidden absolute bottom-4 left-0 right-0 z-20 pl-4 pr-5 flex items-center gap-4">
+      {/* Mobile navigation + progress - same horizontal alignment */}
+      <div className="md:hidden absolute bottom-4 left-0 right-0 z-20 px-4 sm:px-5 md:px-6 flex items-center gap-4">
         <div className="flex gap-2">
           <button
             onClick={scrollPrev}

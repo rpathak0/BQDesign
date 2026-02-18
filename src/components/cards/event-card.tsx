@@ -59,8 +59,8 @@ export function EventCard({ event, variant = "landscape", href = null }: EventCa
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         
-        {/* Price Tag */}
-        <div className="absolute bottom-2 left-2 px-2 py-1 bg-background/90 backdrop-blur-md rounded text-xs font-bold shadow-sm z-20 text-white">
+        {/* Price Tag - visible in light and dark theme */}
+        <div className="absolute bottom-2 left-2 px-2 py-1 bg-background/90 backdrop-blur-md rounded text-xs font-bold shadow-sm z-20 text-foreground">
           {event.price}
         </div>
 

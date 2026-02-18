@@ -2,15 +2,20 @@ import { useRef } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import React from "react";
 
 interface ContentRailProps {
   title: string;
   children: React.ReactNode;
   action?: React.ReactNode;
   rows?: 1 | 2;
+  /** Hide the prev/next arrow buttons (e.g. for Top events) */
+  hideNavArrows?: boolean;
+  /** Items per page (e.g. 8 = 2 rows × 4 columns). Chunk and snap scroll by this many. */
+  itemsPerPage?: number;
 }
 
-export function ContentRail({ title, children, action, rows = 1 }: ContentRailProps) {
+export function ContentRail({ title, children, action, rows = 1, hideNavArrows, itemsPerPage }: ContentRailProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -21,64 +26,91 @@ export function ContentRail({ title, children, action, rows = 1 }: ContentRailPr
     }
   };
 
-  return (
-    <div className="py-6 md:py-8 space-y-6 container mx-auto pl-4 sm:pl-5 md:pl-6 pr-6 sm:pr-8 md:pr-10 w-full max-w-[100vw]">
-      <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <h2 className="text-xl md:text-3xl font-display font-bold tracking-tight md:whitespace-nowrap">
-            {title}
-          </h2>
-          <div className="h-1 w-16 md:w-20 bg-primary mt-2 rounded-full" />
-        </div>
-        
-        <div className="flex items-center justify-start md:justify-end gap-3 md:gap-4 flex-wrap md:flex-nowrap mt-1 md:mt-0">
-          {/* Navigation arrows */}
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full w-9 h-9 border-border/50 hover:bg-primary hover:text-white hover:border-primary transition-colors"
-              onClick={() => scroll("left")}
-              data-testid={`button-rail-prev-${title.toLowerCase().replace(/\s+/g, "-")}`}
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full w-9 h-9 border-border/50 hover:bg-primary hover:text-white hover:border-primary transition-colors"
-              onClick={() => scroll("right")}
-              data-testid={`button-rail-next-${title.toLowerCase().replace(/\s+/g, "-")}`}
-            >
-              <ChevronRight className="w-4 h-4" />
-            </Button>
-          </div>
+  const childArray = React.Children.toArray(children);
+  const perPage = itemsPerPage ?? 0;
+  const useGrouped = perPage >= 4 && childArray.length > 0;
+  const chunks = useGrouped
+    ? Array.from({ length: Math.ceil(childArray.length / perPage) }, (_, i) => childArray.slice(i * perPage, i * perPage + perPage))
+    : null;
+  /* 2 rows × 4 cols: width = 4 × card(280/320) + 3 × gap(24) = 1192px / 1352px */
+  const groupWidthClass = "w-[1192px] md:w-[1352px]";
 
-          {/* Discover More CTA - desktop only; black in light mode, yellow in dark */}
-          <Button
-            variant="link"
-            className="hidden md:inline-flex text-black dark:text-[#ffdd00] text-sm font-semibold items-center gap-1 whitespace-nowrap px-0"
-            data-testid={`button-rail-discover-${title.toLowerCase().replace(/\s+/g, "-")}`}
-          >
-            Discover More
-            <ArrowRight className="w-3 h-3" />
-          </Button>
+  /* Same placement as Offers & Promotions: container + gutter, scroll track padding and gap */
+  return (
+    <div className="py-6 md:py-8 space-y-6 container mx-auto px-4 sm:px-5 md:px-6 w-full">
+      <div className="flex items-center justify-between gap-4 mb-8">
+        <h2 className="text-3xl font-display font-bold text-foreground min-w-0">
+          {title}
+        </h2>
+
+        <div className="flex items-center gap-4 shrink-0">
+          {!hideNavArrows && (
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full w-10 h-10 border-border/50 hover:bg-primary hover:text-white hover:border-primary transition-colors"
+                onClick={() => scroll("left")}
+                data-testid={`button-rail-prev-${title.toLowerCase().replace(/\s+/g, "-")}`}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full w-10 h-10 border-border/50 hover:bg-primary hover:text-white hover:border-primary transition-colors"
+                onClick={() => scroll("right")}
+                data-testid={`button-rail-next-${title.toLowerCase().replace(/\s+/g, "-")}`}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </Button>
+            </div>
+          )}
+
+          {action ?? (
+            <Button
+              variant="link"
+              className="text-black dark:text-[#ffdd00] font-semibold group hidden md:flex items-center gap-1 whitespace-nowrap px-0"
+              data-testid={`button-rail-discover-${title.toLowerCase().replace(/\s+/g, "-")}`}
+            >
+              Discover More
+              <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          )}
         </div>
       </div>
 
       <div className="w-full min-w-0">
-      <div
-        ref={scrollRef}
-        className={cn(
-          "pb-6 md:pb-8 no-scrollbar snap-x overflow-x-auto w-full min-w-0",
-          "pr-8 sm:pr-10 md:pr-12",
-          rows === 1
-            ? "flex gap-4 md:gap-6 pr-8 sm:pr-10 md:pr-14"
-            : "grid grid-rows-2 grid-flow-col gap-4 auto-cols-max pr-8 sm:pr-10 md:pr-14"
-        )}
-      >
-        {children}
-      </div>
+        <div
+          ref={scrollRef}
+          className={cn(
+            "pb-6 md:pb-8 no-scrollbar overflow-x-auto w-full min-w-0 pr-6 sm:pr-8 md:pr-10",
+            useGrouped ? "snap-x snap-mandatory" : "snap-x"
+          )}
+        >
+          {useGrouped && chunks ? (
+            <div className="flex gap-6 pr-10 sm:pr-12 md:pr-16">
+              {chunks.map((chunk, i) => (
+                <div
+                  key={i}
+                  className={cn("shrink-0 grid grid-cols-4 grid-rows-2 gap-6 snap-start", groupWidthClass)}
+                >
+                  {chunk}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div
+              className={cn(
+                rows === 1
+                  ? "flex gap-6 pr-10 sm:pr-12 md:pr-16"
+                  : "grid grid-rows-2 grid-flow-col gap-6 auto-cols-max pr-10 sm:pr-12 md:pr-16"
+              )}
+            >
+              {children}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

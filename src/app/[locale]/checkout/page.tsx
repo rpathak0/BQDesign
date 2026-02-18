@@ -64,6 +64,7 @@ export default function CheckoutPage() {
   const [cardError, setCardError] = useState<string | null>(null);
   const [selectedPayment, setSelectedPayment] = useState<PaymentOption | null>(null);
   const bookingRef = useRef<string | null>(null);
+  const savedToMyTicketsRef = useRef(false);
   const [detailsOpen, setDetailsOpen] = useState(true);
   const [yourInfoOpen, setYourInfoOpen] = useState(true);
   const [editingEmail, setEditingEmail] = useState(false);
@@ -155,6 +156,37 @@ export default function CheckoutPage() {
     }
   }, [eventSlug]);
 
+  // Persist completed booking to "My tickets" when on confirmed step
+  useEffect(() => {
+    if (step !== 3 || !event || !bookingRef.current || orderItems.length === 0 || savedToMyTicketsRef.current || typeof window === "undefined") return;
+    savedToMyTicketsRef.current = true;
+    const currency = event.ticketCategories?.[0]?.currency ?? event.seatingLayout?.tiers?.[0]?.currency ?? "AED";
+    const total = orderItems.reduce((s, x) => s + x.price * x.qty, 0);
+    const record = {
+      id: bookingRef.current,
+      bookingRef: bookingRef.current,
+      eventSlug: event.slug,
+      eventTitle: event.title,
+      eventDate: event.date,
+      eventLocation: event.location,
+      eventImage: event.image,
+      items: orderItems.map((i) => ({ name: i.name, qty: i.qty, price: i.price, currency: i.currency })),
+      dateLabel: selectedDateLabel ?? null,
+      dateTime: selectedDateTime ?? null,
+      total,
+      currency,
+      purchasedAt: new Date().toISOString(),
+    };
+    try {
+      const raw = localStorage.getItem("bq_my_tickets");
+      const list = raw ? JSON.parse(raw) : [];
+      list.unshift(record);
+      localStorage.setItem("bq_my_tickets", JSON.stringify(list));
+    } catch {
+      // ignore
+    }
+  }, [step, event, orderItems, selectedDateLabel, selectedDateTime]);
+
   useEffect(() => {
     const t = setInterval(() => {
       setTimeLeft((prev) => Math.max(0, prev - 1));
@@ -175,7 +207,7 @@ export default function CheckoutPage() {
   const canPrev = step > 0;
 
   const handleNext = () => {
-    if (step < STEPS.length - 1 && (stepId !== "attendee" && stepId !== "quick_order" || canNext))
+    if (step < STEPS.length - 1 && (stepId !== "quick_order" || canNext))
       setStep((s) => s + 1);
   };
   const handlePrev = () => {
@@ -253,7 +285,7 @@ export default function CheckoutPage() {
       <Navbar />
       <main className={cn(
         "flex-1 w-full flex flex-col min-h-0 py-4 md:py-6 pb-36 md:pb-32",
-        stepId === "checkout" ? "pt-14 md:pt-16 container mx-auto px-4 min-h-[calc(100vh-8rem)]" : stepId === "confirmed" ? "pt-14 md:pt-16 max-w-none px-0 md:px-0" : "pt-20 md:pt-24 max-w-lg mx-auto px-4"
+        stepId === "checkout" ? "pt-14 md:pt-16 container mx-auto px-4 sm:px-5 md:px-6 min-h-[calc(100vh-8rem)]" : stepId === "confirmed" ? "pt-14 md:pt-16 max-w-none px-0 md:px-0" : "pt-20 md:pt-24 max-w-lg mx-auto px-4 sm:px-5 md:px-6"
       )}>
         {stepId === "checkout" && (
           <button
@@ -757,7 +789,7 @@ export default function CheckoutPage() {
                     #ticket-confirmed-print-area button { display: none !important; }
                   }
                 `}} />
-                <div className="flex-1 w-full container mx-auto py-6 md:py-8 flex flex-col lg:flex-row gap-6 lg:gap-8">
+                <div className="flex-1 w-full container mx-auto py-6 md:py-8 flex flex-col lg:flex-row gap-6 lg:gap-8 px-4 sm:px-5 md:px-6">
                   {/* Left: Event summary card (like reference sidebar) */}
                   <aside className="w-full lg:w-[320px] shrink-0">
                     <Card className="rounded-2xl border-border shadow-lg overflow-hidden sticky top-4">
@@ -979,7 +1011,7 @@ export default function CheckoutPage() {
             "shadow-[0_-4px_20px_rgba(0,0,0,0.08)] rounded-t-2xl"
           )}
         >
-          <div className="w-full container mx-auto px-4 py-4 flex items-center justify-between gap-4">
+          <div className="w-full container mx-auto px-4 sm:px-5 md:px-6 py-4 flex items-center justify-between gap-4">
             <button
               type="button"
               onClick={() => setTicketOrderDetailsOpen(true)}
@@ -1040,7 +1072,7 @@ export default function CheckoutPage() {
             "py-4 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
           )}
         >
-          <div className="w-full container mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+          <div className="w-full container mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 px-4 sm:px-5 md:px-6">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>Time Remaining</span>
               <span className={cn("font-mono font-semibold rounded-full px-2 py-0.5", timeLeft <= 60 ? "text-destructive bg-destructive/10" : "text-green-600 dark:text-green-400 bg-green-500/10")}>

@@ -131,21 +131,20 @@ export default function Home() {
           );
   
   return (
-    <div className="min-h-screen bg-background flex flex-col overflow-x-hidden w-full max-w-[100vw]">
+    <div className="min-h-screen bg-background flex flex-col overflow-x-hidden w-full">
       <Navbar onAiClick={() => setIsAiOpen(true)} />
       <div className="hidden md:block">
         <QuickBookTab />
       </div>
       
-      <main className="flex-1 w-full max-w-[100vw] overflow-x-hidden pr-5 sm:pr-6 md:pr-8">
+      <main className="flex-1 w-full overflow-x-hidden">
+        {/* Hero carousel full width (100%); inner content keeps same left/right alignment via container */}
         <HeroCarousel movies={MOVIES} />
         
-        {/* AI Search Stub Removed from here as requested */}
-        
         <FloatingControls isOpen={isAiOpen} onClose={() => setIsAiOpen(false)} onOpen={() => setIsAiOpen(true)} />
-        
-        {/* Things to do header + Filters + Categories (one padded block so carousel aligns with title) */}
-        <div className="container mx-auto mt-12 md:mt-16 mb-16 md:mb-20 w-full max-w-[100vw] pl-4 sm:pl-5 md:pl-6 pr-6 sm:pr-8 md:pr-10">
+
+        {/* Things to do header + Filters + Categories - same left/right alignment as inner pages */}
+        <div className="container mx-auto mt-12 md:mt-16 mb-16 md:mb-20 w-full px-4 sm:px-5 md:px-6">
             <div className="flex flex-col gap-3 border-b border-border/20 pb-4 mb-6">
               <div className="flex items-end justify-between gap-4">
                 <div className="shrink-0 min-w-0">
@@ -194,6 +193,8 @@ export default function Home() {
             <ContentRail 
               title={t('topEvents')}
               rows={2}
+              hideNavArrows
+              itemsPerPage={8}
               action={<Button variant="link" className="text-primary text-xs md:text-sm">{t('viewAll')}</Button>}
             >
               {personalizedEvents.map(event => (
@@ -203,10 +204,12 @@ export default function Home() {
               ))}
             </ContentRail>
 
-            {/* Top Attractions */}
+            {/* Top Attractions - same as Top events: 4 per row, next 4, no arrows */}
             <ContentRail 
               title={t('topAttractions')}
               rows={2}
+              hideNavArrows
+              itemsPerPage={8}
               action={<Button variant="link" className="text-primary text-xs md:text-sm">{t('viewAll')}</Button>}
             >
               {personalizedEvents.slice().reverse().map(event => (
@@ -217,19 +220,20 @@ export default function Home() {
             </ContentRail>
         </div>
 
-        {/* Popular Artists */}
-        <section className="container mx-auto py-8 bg-secondary/10 rounded-3xl mb-8 pl-4 sm:pl-5 md:pl-6 pr-6 sm:pr-8 md:pr-10">
-          <div className="flex items-center justify-between gap-3 mb-6">
-             <h2 className="text-2xl md:text-3xl font-display font-bold whitespace-nowrap">
+        {/* Popular Artists - same position/layout as Offers & Promotions */}
+        <section className="container mx-auto py-8 bg-secondary/10 rounded-3xl mb-8 px-4 sm:px-5 md:px-6 w-full">
+          <div className="flex items-center justify-between gap-4 mb-8">
+             <h2 className="text-3xl font-display font-bold text-black dark:text-white min-w-0">
                {t('popularArtists')}
              </h2>
-             <Link href={`${base}/artists`}>
+             <Link href={`${base}/artists`} className="shrink-0">
                <Button
                  variant="link"
-                 className="text-primary text-xs md:text-sm px-0"
+                 className="text-black dark:text-[#ffdd00] font-semibold group flex items-center gap-1 whitespace-nowrap px-0"
                  data-testid="button-view-all-artists"
                >
                  {t('viewAll')}
+                 <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                </Button>
              </Link>
           </div>
@@ -374,11 +378,10 @@ export default function Home() {
             </Button>
         </div>
 
-        {/* Movies Section */}
+        {/* Movies Section - same left/right gutter as Popular Artists */}
         <section className="relative py-12 md:py-16">
-
           <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#020617] to-[#020617]" />
-          <div className="relative container mx-auto space-y-8 px-4 sm:px-5 md:px-6">
+          <div className="relative container mx-auto space-y-8 w-full page-gutter-x">
             {/* Movies heading */}
             <div className="flex items-baseline justify-between gap-3">
               <div className="min-w-0">

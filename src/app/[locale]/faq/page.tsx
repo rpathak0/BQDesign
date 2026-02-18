@@ -40,8 +40,8 @@ export default function FAQPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navbar />
-      <main className="flex-1 container mx-auto py-8 md:py-12 max-w-2xl">
+      <Navbar variant="light" />
+      <main className="flex-1 container mx-auto pt-20 md:pt-24 py-8 md:py-12 max-w-2xl px-4 sm:px-5 md:px-6">
         <Link
           href={`/${locale}`}
           className="text-sm text-muted-foreground hover:text-foreground mb-6 inline-block"

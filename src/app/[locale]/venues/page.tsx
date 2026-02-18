@@ -75,9 +75,9 @@ export default function VenuesPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navbar />
-      <main className="flex-1">
-        <div className="container mx-auto py-6 md:py-8">
+      <Navbar variant="light" />
+      <main className="flex-1 pt-20 md:pt-24">
+        <div className="container mx-auto py-6 md:py-8 px-4 sm:px-5 md:px-6">
           {/* Navigation: Back | Home > Venues */}
           <nav className="text-sm mb-4 flex items-center gap-3 flex-wrap">
             <Link

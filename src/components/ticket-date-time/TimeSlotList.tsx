@@ -39,7 +39,7 @@ export function TimeSlotList({
         const selected = isSelected(slot);
         const slotId = slot.id ?? `slot-${index}`;
         return (
-          <li key={slotId} role="option" aria-selected={selected}>
+          <li key={slotId} role="option" aria-selected={selected ?? undefined}>
             <button
               type="button"
               disabled={!available}

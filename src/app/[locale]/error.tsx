@@ -18,7 +18,7 @@ const orbVariants = {
   pulse: {
     scale: [1, 1.05, 1],
     opacity: [0.2, 0.35, 0.2],
-    transition: { duration: 2.5, repeat: Infinity, ease: "easeInOut" },
+    transition: { duration: 2.5, repeat: Infinity, ease: "easeInOut" as const },
   },
 };
 

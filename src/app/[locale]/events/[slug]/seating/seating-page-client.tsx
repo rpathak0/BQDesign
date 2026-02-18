@@ -128,7 +128,7 @@ export function SeatingPageClient({ event }: SeatingPageClientProps) {
       <main className="flex-1 flex flex-col">
         {/* Event header bar - white bar with back, title, date/time, venue */}
         <div className="bg-card border-b border-border/50 shadow-sm">
-          <div className="container mx-auto py-4">
+          <div className="container mx-auto py-4 px-4 sm:px-5 md:px-6">
             <div className="flex flex-wrap items-start gap-4">
               <Link
                 href={`${base}/events/${slug}`}
@@ -162,7 +162,7 @@ export function SeatingPageClient({ event }: SeatingPageClientProps) {
         </div>
 
         {/* Main: Order details (left) | Stage + Map | Zoom (right) */}
-        <div className="flex-1 flex flex-col lg:flex-row container mx-auto px-4 py-4 gap-4">
+        <div className="flex-1 flex flex-col lg:flex-row container mx-auto px-4 sm:px-5 md:px-6 py-4 gap-4">
           {/* Order details - left sidebar */}
           <aside
             className={orderDetailsOpen ? "w-full lg:w-80 shrink-0" : "hidden lg:block lg:w-0"}
@@ -316,7 +316,7 @@ export function SeatingPageClient({ event }: SeatingPageClientProps) {
 
         {/* Bottom bar: selected count + total + Continue */}
         <div className="sticky bottom-0 left-0 right-0 border-t border-border bg-card/95 backdrop-blur py-4">
-          <div className="container mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+          <div className="container mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 px-4 sm:px-5 md:px-6">
             <div className="text-sm text-muted-foreground">
               {selectedSeats.length > 0 ? (
                 <span>

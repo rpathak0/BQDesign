@@ -59,7 +59,7 @@ export function TicketSelectionClient({ event }: TicketSelectionClientProps) {
     firstDate?.dateKey ?? null
   );
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const [numberOfMonths, setNumberOfMonths] = useState(2);
+  const [numberOfMonths, setNumberOfMonths] = useState<1 | 2>(2);
   const [selectedSlotLabel, setSelectedSlotLabel] = useState<string | null>(null);
 
   const availability = useMemo(
@@ -200,7 +200,7 @@ export function TicketSelectionClient({ event }: TicketSelectionClientProps) {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <main className="flex-1 w-full container mx-auto pt-20 md:pt-24 pb-28 md:pb-24 px-4">
+      <main className="flex-1 w-full container mx-auto pt-20 md:pt-24 pb-28 md:pb-24 px-4 sm:px-5 md:px-6">
         <button
           type="button"
           onClick={() => (step === 2 ? setStep(1) : router.back())}
@@ -442,7 +442,7 @@ export function TicketSelectionClient({ event }: TicketSelectionClientProps) {
             "py-4 rounded-t-2xl md:rounded-t-none shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
           )}
         >
-          <div className="w-full container mx-auto px-4 flex items-center justify-between gap-4">
+          <div className="w-full container mx-auto px-4 sm:px-5 md:px-6 flex items-center justify-between gap-4">
             <button
               type="button"
               onClick={() => setOrderDetailsOpen(true)}

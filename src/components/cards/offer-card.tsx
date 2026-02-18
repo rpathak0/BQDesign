@@ -20,12 +20,12 @@ export function OfferCard({ offer }: OfferCardProps) {
         {/* Optional Badge - Removed as per new design */}
       </div>
 
-      {/* Text Content */}
+      {/* Text Content - visible in both light and dark theme */}
       <div className="space-y-2">
-        <h3 className="text-xl font-display font-bold text-white group-hover:text-primary transition-colors">
+        <h3 className="text-xl font-display font-bold text-foreground group-hover:text-primary transition-colors">
             {offer.title}
         </h3>
-        <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
+        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
             {offer.description}
         </p>
       </div>

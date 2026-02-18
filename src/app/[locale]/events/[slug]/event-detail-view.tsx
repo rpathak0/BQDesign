@@ -60,7 +60,7 @@ export function EventDetailView({ event }: { event: EventDetail }) {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <main className="flex-1 w-full container mx-auto pt-20 md:pt-24 pb-6 md:pb-8 px-4">
+      <main className="flex-1 w-full container mx-auto pt-20 md:pt-24 pb-6 md:pb-8 px-4 sm:px-5 md:px-6">
         {/* Breadcrumb + actions: above poster so they don’t bind with the header */}
         <motion.div
           initial={reduced ? false : { opacity: 0 }}

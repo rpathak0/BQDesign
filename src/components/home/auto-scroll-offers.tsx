@@ -64,20 +64,20 @@ export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
 
   return (
     <section 
-        className="container mx-auto pt-10 md:pt-12 mb-16 pl-4 sm:pl-5 md:pl-6 pr-6 sm:pr-8 md:pr-10"
+        className="container mx-auto pt-10 md:pt-12 mb-16 px-4 sm:px-5 md:px-6 w-full"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
     >
       <div className="flex items-center justify-between gap-4 mb-8">
-        <h2 className="text-3xl font-display font-bold text-black dark:text-white min-w-0">Offers & Promotions</h2>
+        <h2 className="text-3xl font-display font-bold text-foreground min-w-0">Offers & Promotions</h2>
         
         <div className="flex items-center gap-4 shrink-0">
-             {/* Navigation Buttons */}
+             {/* Navigation Buttons - visible in light and dark theme */}
              <div className="flex gap-2">
                 <Button 
                     variant="outline" 
                     size="icon" 
-                    className="rounded-full w-10 h-10 border-white/20 bg-transparent hover:bg-[#ffdd00] hover:text-black hover:border-[#ffdd00] transition-colors"
+                    className="rounded-full w-10 h-10 border-border hover:bg-[#ffdd00] hover:text-black hover:border-[#ffdd00] transition-colors text-foreground"
                     onClick={() => scroll("left")}
                 >
                     <ChevronLeft className="w-5 h-5" />
@@ -85,7 +85,7 @@ export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
                 <Button 
                     variant="outline" 
                     size="icon" 
-                    className="rounded-full w-10 h-10 border-white/20 bg-transparent hover:bg-[#ffdd00] hover:text-black hover:border-[#ffdd00] transition-colors"
+                    className="rounded-full w-10 h-10 border-border hover:bg-[#ffdd00] hover:text-black hover:border-[#ffdd00] transition-colors text-foreground"
                     onClick={() => scroll("right")}
                 >
                     <ChevronRight className="w-5 h-5" />
@@ -94,7 +94,7 @@ export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
 
             <Button
               variant="link"
-              className="text-black dark:text-[#ffdd00] font-semibold group hidden md:flex items-center gap-1"
+              className="text-foreground dark:text-[#ffdd00] font-semibold group hidden md:flex items-center gap-1"
             >
               Discover More
               <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />

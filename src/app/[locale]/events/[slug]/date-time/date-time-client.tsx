@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { Calendar } from "@/components/ui/calendar";
+import { DayButton } from "react-day-picker";
 import { ChevronLeft, Calendar as CalendarIcon, Check } from "lucide-react";
 import type { EventDetail, DateOption, TimeSlot } from "@/data/events";
 import { cn } from "@/lib/utils";
@@ -89,15 +90,8 @@ export function DateTimeSelectionClient({ event }: DateTimeSelectionClientProps)
   }, [selectedDateKey]);
 
   const DateTimeDayButton = useCallback(
-    function DateTimeDayButton({
-      day,
-      modifiers,
-      ...props
-    }: {
-      day: { date: Date };
-      modifiers: { selected?: boolean; disabled?: boolean; range_start?: boolean; range_end?: boolean; range_middle?: boolean };
-      [key: string]: unknown;
-    }) {
+    function DateTimeDayButton(props: React.ComponentProps<typeof DayButton>) {
+      const { day, modifiers, ...rest } = props;
       const key = toDateKey(day.date);
       const info = dateInfoMap.get(key);
       const sub =
@@ -131,7 +125,7 @@ export function DateTimeSelectionClient({ event }: DateTimeSelectionClientProps)
             !modifiers.disabled && !selected && !soldOut && "text-foreground"
           )}
           disabled={modifiers.disabled}
-          {...props}
+          {...rest}
         >
           {/* Bigger date number - large, bold */}
           <span className={cn(
@@ -215,7 +209,7 @@ export function DateTimeSelectionClient({ event }: DateTimeSelectionClientProps)
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <main className="flex-1 container mx-auto py-6 md:py-8 max-w-2xl px-4">
+      <main className="flex-1 container mx-auto py-6 md:py-8 max-w-2xl px-4 sm:px-5 md:px-6">
         <Link
           href={`/${locale}/events/${slug}`}
           onClick={handleBack}
