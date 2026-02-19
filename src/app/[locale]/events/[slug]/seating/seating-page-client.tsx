@@ -124,7 +124,7 @@ export function SeatingPageClient({ event }: SeatingPageClientProps) {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navbar />
+      <Navbar variant="light" />
       <main className="flex-1 flex flex-col">
         {/* Event header bar - white bar with back, title, date/time, venue */}
         <div className="bg-card border-b border-border/50 shadow-sm">

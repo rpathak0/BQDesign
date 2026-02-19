@@ -282,7 +282,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navbar />
+      <Navbar variant="light" />
       <main className={cn(
         "flex-1 w-full flex flex-col min-h-0 py-4 md:py-6 pb-36 md:pb-32",
         stepId === "checkout" ? "pt-14 md:pt-16 container mx-auto px-4 sm:px-5 md:px-6 min-h-[calc(100vh-8rem)]" : stepId === "confirmed" ? "pt-14 md:pt-16 max-w-none px-0 md:px-0" : "pt-20 md:pt-24 max-w-lg mx-auto px-4 sm:px-5 md:px-6"

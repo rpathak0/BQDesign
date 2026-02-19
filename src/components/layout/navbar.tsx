@@ -41,6 +41,12 @@ export function Navbar({ onAiClick, variant = "default" }: { onAiClick?: () => v
   const isLightVariant = variant === "light";
   const { theme } = useTheme();
   const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     const root = typeof document !== "undefined" ? document.documentElement : null;
     setIsDark(root?.classList.contains("dark") ?? false);
@@ -93,7 +99,7 @@ export function Navbar({ onAiClick, variant = "default" }: { onAiClick?: () => v
               ? "bg-black/80 backdrop-blur-xl border-b border-white/10 py-2"
               : "bg-transparent dark:bg-transparent backdrop-blur-sm py-4 border-b border-white/10 dark:border-transparent"
         )}
-        style={isLightVariant ? {
+        style={isLightVariant || !isDark ? {
           backgroundColor: isDark ? "#0a0a0f" : "#ffffff",
           borderColor: isDark ? "rgba(255,255,255,0.1)" : "#e5e7eb",
           color: isDark ? "#f4f4f5" : "#171717",
@@ -102,26 +108,26 @@ export function Navbar({ onAiClick, variant = "default" }: { onAiClick?: () => v
         <div
           className={cn(
             "container mx-auto flex items-center justify-between gap-4 px-4 sm:px-5 md:px-6",
-            !isLightVariant && "text-white"
+            !isLightVariant && isDark && "text-white"
           )}
-          style={isLightVariant ? { color: isDark ? "#f4f4f5" : "#171717" } : undefined}
+          style={isLightVariant || !isDark ? { color: isDark ? "#f4f4f5" : "#171717" } : undefined}
         >
-          {/* Logo - light variant: dark logo in light theme, light logo in dark theme */}
-          <div className="flex items-center gap-6" style={isLightVariant ? { color: "inherit" } : undefined}>
-            <Link href="/" className="flex items-center gap-2" style={isLightVariant ? { color: "inherit" } : undefined}>
+          {/* Logo - dark in light theme, light in dark theme (both variants) */}
+          <div className="flex items-center gap-6" style={isLightVariant || !isDark ? { color: "inherit" } : undefined}>
+            <Link href="/" className="flex items-center gap-2" style={isLightVariant || !isDark ? { color: "inherit" } : undefined}>
                 <SafeImage 
                   src="/assets/hero-bg.png" 
                   alt="BookingQube" 
                   className={cn(
                     "h-10 w-auto object-contain transition-all",
-                    isLightVariant ? "brightness-0 dark:invert" : "brightness-0 invert"
+                    (isLightVariant || !isDark) ? "brightness-0 dark:invert" : "brightness-0 invert"
                   )}
-                  style={isLightVariant && !isDark ? { filter: "brightness(0)" } : isLightVariant && isDark ? { filter: "brightness(0) invert(1)" } : undefined}
+                  style={(isLightVariant || !isDark) ? (!isDark ? { filter: "brightness(0)" } : { filter: "brightness(0) invert(1)" }) : undefined}
                 />
             </Link>
 
             {showLoyalty && (
-               <Link href="/loyalty" className="text-sm font-medium opacity-80 hover:opacity-100 hover:text-primary transition-colors" style={isLightVariant ? { color: "inherit" } : undefined}>
+               <Link href="/loyalty" className="text-sm font-medium opacity-80 hover:opacity-100 hover:text-primary transition-colors" style={(isLightVariant || !isDark) ? { color: "inherit" } : undefined}>
                   Loyalty Program
                </Link>
             )}
@@ -130,28 +136,29 @@ export function Navbar({ onAiClick, variant = "default" }: { onAiClick?: () => v
           <div className="flex-1" />
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2 sm:gap-4" style={isLightVariant ? { color: "inherit" } : undefined}>
+          <div className="flex items-center gap-2 sm:gap-4" style={(isLightVariant || !isDark) ? { color: "inherit" } : undefined}>
             <Button 
                 variant="ghost" 
                 size="icon" 
-                className={cn("hidden md:flex rounded-full w-10 h-10", isLightVariant ? "hover:bg-gray-100 dark:hover:bg-white/10" : "opacity-90 hover:opacity-100 hover:bg-black/10 dark:hover:bg-white/10")}
-                style={isLightVariant ? { color: "inherit" } : undefined}
+                className={cn("hidden md:flex rounded-full w-10 h-10", (isLightVariant || !isDark) ? "hover:bg-gray-100 dark:hover:bg-white/10" : "opacity-90 hover:opacity-100 hover:bg-black/10 dark:hover:bg-white/10")}
+                style={(isLightVariant || !isDark) ? { color: "inherit" } : undefined}
                 onClick={() => setSearchOpen(true)}
             >
                 <Search className="w-5 h-5" />
             </Button>
 
-            <Button variant="ghost" size="sm" className={cn("hidden lg:flex gap-2 rounded-full", isLightVariant ? "hover:bg-gray-100 dark:hover:bg-white/10" : "opacity-90 hover:opacity-100 hover:bg-black/10 dark:hover:bg-white/10")} style={isLightVariant ? { color: "inherit" } : undefined}>
+            <Button variant="ghost" size="sm" className={cn("hidden lg:flex gap-2 rounded-full", (isLightVariant || !isDark) ? "hover:bg-gray-100 dark:hover:bg-white/10" : "opacity-90 hover:opacity-100 hover:bg-black/10 dark:hover:bg-white/10")} style={(isLightVariant || !isDark) ? { color: "inherit" } : undefined}>
               <MapPin className="w-4 h-4" />
               <span>{t('dubai')}</span>
             </Button>
             
-            <div className={cn("h-6 w-px hidden lg:block", isLightVariant ? "bg-gray-300 dark:bg-gray-600" : "bg-current opacity-30")} />
+            <div className={cn("h-6 w-px hidden lg:block", (isLightVariant || !isDark) ? "bg-gray-300 dark:bg-gray-600" : "bg-current opacity-30")} />
             
             <ThemeToggle />
             <LanguageSwitcher />
 
             {isLoggedIn ? (
+              mounted ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -159,13 +166,13 @@ export function Navbar({ onAiClick, variant = "default" }: { onAiClick?: () => v
                     size="icon"
                     className={cn(
                       "rounded-full w-10 h-10 p-0 hidden sm:flex transition-all",
-                      isLightVariant ? "hover:bg-gray-100 dark:hover:bg-white/10 ring-offset-background data-[state=open]:ring-2 data-[state=open]:ring-primary/30" : "opacity-90 hover:opacity-100 hover:bg-white/10 dark:hover:bg-white/10 data-[state=open]:ring-2 data-[state=open]:ring-white/20"
+                      (isLightVariant || !isDark) ? "hover:bg-gray-100 dark:hover:bg-white/10 ring-offset-background data-[state=open]:ring-2 data-[state=open]:ring-primary/30" : "opacity-90 hover:opacity-100 hover:bg-white/10 dark:hover:bg-white/10 data-[state=open]:ring-2 data-[state=open]:ring-white/20"
                     )}
-                    style={isLightVariant ? { color: "inherit" } : undefined}
+                    style={(isLightVariant || !isDark) ? { color: "inherit" } : undefined}
                   >
                     <Avatar className="h-9 w-9 transition-shadow">
                       <AvatarImage src="" alt="Profile" />
-                      <AvatarFallback className={cn("text-sm font-medium", isLightVariant ? "bg-primary/10 text-primary" : "bg-white/15 text-white")}>
+                      <AvatarFallback className={cn("text-sm font-medium", (isLightVariant || !isDark) ? "bg-primary/10 text-primary" : "bg-white/15 text-white")}>
                         <User className="w-4 h-4" />
                       </AvatarFallback>
                     </Avatar>
@@ -265,11 +272,28 @@ export function Navbar({ onAiClick, variant = "default" }: { onAiClick?: () => v
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+              ) : (
+              <div
+                className={cn(
+                  "rounded-full w-10 h-10 p-0 hidden sm:flex items-center justify-center transition-all",
+                  isLightVariant ? "hover:bg-gray-100 dark:hover:bg-white/10" : "opacity-90 hover:opacity-100 hover:bg-white/10 dark:hover:bg-white/10"
+                )}
+                style={(isLightVariant || !isDark) ? { color: "inherit" } : undefined}
+                aria-hidden
+              >
+                <Avatar className="h-9 w-9 transition-shadow">
+                  <AvatarImage src="" alt="" />
+                  <AvatarFallback className={cn("text-sm font-medium", (isLightVariant || !isDark) ? "bg-primary/10 text-primary" : "bg-white/15 text-white")}>
+                    <User className="w-4 h-4" />
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+              )
             ) : (
               <Link href={`/${locale}/login`}>
                 <Button className={cn(
                   "rounded-full px-6 hidden sm:flex border-2 shadow-lg",
-                  isLightVariant
+                  (isLightVariant || !isDark)
                     ? "bg-primary text-primary-foreground border-primary hover:bg-primary/90"
                     : "bg-white dark:bg-white text-black dark:text-black border-white dark:border-white hover:bg-gray-100 dark:hover:bg-gray-100"
                 )}>
@@ -278,7 +302,7 @@ export function Navbar({ onAiClick, variant = "default" }: { onAiClick?: () => v
               </Link>
             )}
 
-            <Button variant="ghost" size="icon" className={cn("sm:hidden", isLightVariant ? "hover:bg-gray-100 dark:hover:bg-white/10" : "opacity-90 hover:opacity-100")} style={isLightVariant ? { color: "inherit" } : undefined}>
+            <Button variant="ghost" size="icon" className={cn("sm:hidden", (isLightVariant || !isDark) ? "hover:bg-gray-100 dark:hover:bg-white/10" : "opacity-90 hover:opacity-100")} style={(isLightVariant || !isDark) ? { color: "inherit" } : undefined}>
               <Menu className="w-5 h-5" />
             </Button>
           </div>

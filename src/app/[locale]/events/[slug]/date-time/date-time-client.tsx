@@ -208,7 +208,7 @@ export function DateTimeSelectionClient({ event }: DateTimeSelectionClientProps)
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navbar />
+      <Navbar variant="light" />
       <main className="flex-1 container mx-auto py-6 md:py-8 max-w-2xl px-4 sm:px-5 md:px-6">
         <Link
           href={`/${locale}/events/${slug}`}

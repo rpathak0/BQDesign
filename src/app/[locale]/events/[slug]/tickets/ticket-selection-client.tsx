@@ -199,7 +199,7 @@ export function TicketSelectionClient({ event }: TicketSelectionClientProps) {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navbar />
+      <Navbar variant="light" />
       <main className="flex-1 w-full container mx-auto pt-20 md:pt-24 pb-28 md:pb-24 px-4 sm:px-5 md:px-6">
         <button
           type="button"
