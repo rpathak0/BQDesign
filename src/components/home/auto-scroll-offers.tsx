@@ -3,12 +3,17 @@ import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OfferCard } from "@/components/cards/offer-card";
 import { Offer } from "@/data/mockContent";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 interface AutoScrollOffersProps {
   offers: Offer[];
 }
 
 export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
+  const params = useParams();
+  const locale = (params?.locale as string) ?? "en";
+  const base = `/${locale}`;
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -92,13 +97,15 @@ export function AutoScrollOffers({ offers }: AutoScrollOffersProps) {
                 </Button>
             </div>
 
-            <Button
-              variant="link"
-              className="text-foreground dark:text-[#ffdd00] font-semibold group hidden md:flex items-center gap-1"
-            >
-              Discover More
-              <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <Link href={`${base}/offers-promotions`}>
+              <Button
+                variant="link"
+                className="text-foreground dark:text-[#ffdd00] font-semibold group hidden md:flex items-center gap-1"
+              >
+                Discover More
+                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
         </div>
       </div>
       

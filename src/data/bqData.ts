@@ -21,6 +21,7 @@ export interface Category {
 
 export interface Artist {
   id: string;
+  slug?: string;
   name: string;
   image: string;
   genre?: string;
@@ -28,9 +29,12 @@ export interface Artist {
 
 export interface Venue {
   id: string;
+  slug?: string;
   name: string;
   location: string;
   image: string;
+  lat?: number;
+  lng?: number;
   type?: "arena" | "hotel" | "club" | "lounge" | "beach" | "park" | "restaurant";
   upcomingEvents?: number;
 }
@@ -114,21 +118,21 @@ export const CATEGORIES: Category[] = [
 export const ARTIST_GENRES = ["EDM", "House", "Pop", "Comedy", "Arabic", "All"] as const;
 
 export const ARTISTS: Artist[] = [
-  { id: "a1", name: "Calvin Harris", image: "/assets/hero-bg.png", genre: "EDM" },
-  { id: "a2", name: "Ben Böhmer", image: "/assets/hero-bg.png", genre: "House" },
-  { id: "a3", name: "Alesso", image: "/assets/hero-bg.png", genre: "EDM" },
-  { id: "a4", name: "Afrojack", image: "/assets/hero-bg.png", genre: "EDM" },
-  { id: "a5", name: "KYGO", image: "/assets/hero-bg.png", genre: "EDM" },
-  { id: "a6", name: "Solomun", image: "/assets/hero-bg.png", genre: "House" },
+  { id: "a1", slug: "calvin-harris", name: "Calvin Harris", image: "/assets/hero-bg.png", genre: "EDM" },
+  { id: "a2", slug: "ben-bohmer", name: "Ben Böhmer", image: "/assets/hero-bg.png", genre: "House" },
+  { id: "a3", slug: "alesso", name: "Alesso", image: "/assets/hero-bg.png", genre: "EDM" },
+  { id: "a4", slug: "afrojack", name: "Afrojack", image: "/assets/hero-bg.png", genre: "EDM" },
+  { id: "a5", slug: "kygo", name: "KYGO", image: "/assets/hero-bg.png", genre: "EDM" },
+  { id: "a6", slug: "solomun", name: "Solomun", image: "/assets/hero-bg.png", genre: "House" },
 ];
 
 export const VENUE_TYPES = ["arena", "hotel", "club", "lounge", "beach", "park", "restaurant"] as const;
 
 export const VENUES: Venue[] = [
-  { id: "v1", name: "Etihad Arena", location: "Yas Island", image: "/assets/hero-bg.png", type: "arena", upcomingEvents: 12 },
-  { id: "v2", name: "Coca-Cola Arena", location: "City Walk", image: "/assets/hero-bg.png", type: "arena", upcomingEvents: 8 },
-  { id: "v3", name: "Dubai Opera", location: "Downtown Dubai", image: "/assets/hero-bg.png", type: "arena", upcomingEvents: 5 },
-  { id: "v4", name: "White Dubai", location: "Meydan", image: "/assets/hero-bg.png", type: "club", upcomingEvents: 3 },
-  { id: "v5", name: "Atlantis The Palm", location: "Palm Jumeirah", image: "/assets/hero-bg.png", type: "hotel", upcomingEvents: 2 },
-  { id: "v6", name: "Zero Gravity", location: "Dubai Marina", image: "/assets/hero-bg.png", type: "beach", upcomingEvents: 4 },
+  { id: "v1", slug: "etihad-arena", name: "Etihad Arena", location: "Yas Island", image: "/assets/hero-bg.png", lat: 24.4672, lng: 54.6032, type: "arena", upcomingEvents: 12 },
+  { id: "v2", slug: "coca-cola-arena", name: "Coca-Cola Arena", location: "City Walk", image: "/assets/hero-bg.png", lat: 25.2045, lng: 55.2644, type: "arena", upcomingEvents: 8 },
+  { id: "v3", slug: "dubai-opera", name: "Dubai Opera", location: "Downtown Dubai", image: "/assets/hero-bg.png", lat: 25.1975, lng: 55.2744, type: "arena", upcomingEvents: 5 },
+  { id: "v4", slug: "white-dubai", name: "White Dubai", location: "Meydan", image: "/assets/hero-bg.png", lat: 25.1683, lng: 55.3417, type: "club", upcomingEvents: 3 },
+  { id: "v5", slug: "atlantis-the-palm", name: "Atlantis The Palm", location: "Palm Jumeirah", image: "/assets/hero-bg.png", lat: 25.1304, lng: 55.1171, type: "hotel", upcomingEvents: 2 },
+  { id: "v6", slug: "zero-gravity", name: "Zero Gravity", location: "Dubai Marina", image: "/assets/hero-bg.png", lat: 25.0876, lng: 55.1452, type: "beach", upcomingEvents: 4 },
 ];

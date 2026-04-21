@@ -2,32 +2,14 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import { SafeImage } from "@/components/shared/safe-image";
-
-const BLOGS = [
-  {
-    id: 1,
-    tag: "Cinema Guides",
-    title: "Premium cinema experiences in Dubai & Qatar",
-    meta: "January 2026 • 5 min read",
-    image: "/assets/hero-bg.png",
-  },
-  {
-    id: 2,
-    tag: "City Picks",
-    title: "Top weekend events you can’t miss this week",
-    meta: "Curated by BookingQube editors",
-    image: "/assets/hero-bg.png",
-  },
-  {
-    id: 3,
-    tag: "Insider Tips",
-    title: "How to get the best seats for blockbuster premieres",
-    meta: "Seat selection • Rewards",
-    image: "/assets/hero-bg.png",
-  },
-];
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { BLOG_POSTS } from "@/data/blogs";
 
 export function BlogsSection() {
+  const params = useParams();
+  const locale = (params?.locale as string) ?? "en";
+  const base = `/${locale}`;
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -64,22 +46,25 @@ export function BlogsSection() {
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-          <Button
-            variant="link"
-            className="text-black dark:text-[#ffdd00] text-xs md:text-sm font-semibold flex items-center gap-1 whitespace-nowrap"
-            data-testid="button-discover-blogs"
-          >
-            Discover More
-            <ArrowRight className="w-3 h-3" />
-          </Button>
+          <Link href={`${base}/blog`}>
+            <Button
+              variant="link"
+              className="text-black dark:text-[#ffdd00] text-xs md:text-sm font-semibold flex items-center gap-1 whitespace-nowrap"
+              data-testid="button-discover-blogs"
+            >
+              Discover More
+              <ArrowRight className="w-3 h-3" />
+            </Button>
+          </Link>
         </div>
       </div>
 
       <div ref={scrollRef} className="overflow-x-auto no-scrollbar snap-x pr-6 sm:pr-8 md:pr-10">
         <div className="flex gap-6 pr-10 sm:pr-12 md:pr-16">
-          {BLOGS.map((blog) => (
-            <article
+          {BLOG_POSTS.map((blog) => (
+            <Link
               key={blog.id}
+              href={`${base}/blog/${blog.slug}`}
               className="shrink-0 w-[240px] md:w-[280px] rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:bg-white/8 transition-colors cursor-pointer flex flex-col"
               data-testid={`card-blog-${blog.id}`}
             >
@@ -104,7 +89,7 @@ export function BlogsSection() {
                 </div>
                 <p className="mt-3 text-[11px] text-white/60">{blog.meta}</p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

@@ -195,7 +195,11 @@ export default function Home() {
               rows={2}
               hideNavArrows
               itemsPerPage={8}
-              action={<Button variant="link" className="text-primary text-xs md:text-sm">{t('viewAll')}</Button>}
+              action={
+                <Link href={`${base}/event-listing`}>
+                  <Button variant="link" className="text-primary text-xs md:text-sm">{t('viewAll')}</Button>
+                </Link>
+              }
             >
               {personalizedEvents.map(event => (
                 <div key={event.id} className="snap-start shrink-0">
@@ -210,7 +214,11 @@ export default function Home() {
               rows={2}
               hideNavArrows
               itemsPerPage={8}
-              action={<Button variant="link" className="text-primary text-xs md:text-sm">{t('viewAll')}</Button>}
+              action={
+                <Link href={`${base}/event-listing`}>
+                  <Button variant="link" className="text-primary text-xs md:text-sm">{t('viewAll')}</Button>
+                </Link>
+              }
             >
               {personalizedEvents.slice().reverse().map(event => (
                 <div key={`attr-${event.id}`} className="snap-start shrink-0">
